@@ -20,6 +20,8 @@ public:
     bool match(Number number);
     bool match(Atom atom);
 	bool match(Variable &variable);
+	friend class Variable;
+	friend class Atom;
 private:
     int _value = 0;
 	string _symbol = "";

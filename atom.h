@@ -18,6 +18,7 @@ public:
     bool match(Number number);
 	bool match(Variable &variable);
     friend class Variable;
+	friend class Number;
 private:
     string _symbol;
 };
