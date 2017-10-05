@@ -13,7 +13,8 @@ bool Atom::match(Number number){
 }
 
 bool Atom::match(Variable &variable){
-    if(variable._assignable){     
+    if(variable._assignable){    
+        variable.match(*this);	
         variable._assignable = false;
 	    return true;
     }

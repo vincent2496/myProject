@@ -33,7 +33,8 @@ bool Number::match(Atom atom){
 }
 
 bool Number::match(Variable &variable){
-    if(variable._assignable){     
+    if(variable._assignable){    
+        variable.match(*this);	
         variable._assignable = false;
 	    return true;
     }
