@@ -13,6 +13,7 @@ class Variable;
 
 class Number{
 public:
+    Number(){}
     Number(int i);
     string symbol();
     string value();  
