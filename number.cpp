@@ -4,7 +4,7 @@
 
 using namespace std;
 
-Number::Number(int i){
+Number::Number(double i){
 	_value = i;
 	
 	string s;

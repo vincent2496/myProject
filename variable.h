@@ -4,19 +4,23 @@
 #include <string>
 #include "atom.h"
 #include "number.h"
+//#include "term.h"
 
 using namespace::std;
 
 class Atom;
 class Number;
 
-class Variable{
+class Variable{//: public Term{
 public:
     Variable(string s):_symbol(s){}
     string const _symbol;
     string value();
     bool match( Atom atom );
     bool match( Number num );
+	bool getAssignable();
+	bool setAssignable();
+	bool setNonAssignable();
     friend class Atom;
 	friend class Number;
 private:

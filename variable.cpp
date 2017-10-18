@@ -2,6 +2,18 @@
 
 string Variable::value(){ return _value; }
 
+bool getAssignable(){
+	
+}
+
+bool setAssignable(){
+	return true;
+}
+
+bool setNonAssignable(){
+	return false;
+}
+
 bool Variable::match( Atom atom ){
     bool ret = _assignable;
     if(_assignable){
