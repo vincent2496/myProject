@@ -31,7 +31,9 @@ public:
 	friend class Number;
 private:
     string _value;
+	//string _symbol;
     bool _assignable = true;
+	
 };
 
 #endif
