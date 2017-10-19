@@ -14,7 +14,8 @@ class Number;
 
 class Atom : public Term{
 public:
-    Atom (string s);
+    Atom(string s);
+	//~Atom();
     //Atom (string s):_symbol(s) {}
     //bool operator ==(Atom a) {return _symbol == a._symbol;}
     //string symbol();

@@ -4,6 +4,8 @@
 #include "number.h"
 #include "variable.h"
 
+using namespace std;
+
 TEST(Struct, hobby)
 {
   Atom tom("tom");
@@ -79,7 +81,14 @@ TEST(Struct, match5)
 // and #value() should also return "s(X)"
 TEST(Struct, var)
 {
-
+	Variable variable1("X");
+	//Atom tom("tom");
+	//std::vector<Term *> v = {&tom};
+	std::vector<Term *> v = {&variable1};
+	//the type of struct name is "Atom type"
+	Struct struct1(Atom("s"), v);
+	ASSERT_EQ("s(X)", struct1.symbol());
+	ASSERT_EQ("s(X)", struct1.value());
 }
 
 // Given there is Struct s contains a Variable X
@@ -88,7 +97,11 @@ TEST(Struct, var)
 // and #value() should also return "s(tom)"
 TEST(Struct, var_match_atom)
 {
-
+	Variable variable1("X");
+	std::vector<Term *> v = {&variable1};	
+	Atom atom("tom");
+	variable1.match(atom);
+	
 }
 
 // Given there are Struct s1 and Struct s2
