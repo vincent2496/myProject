@@ -19,6 +19,7 @@ public:
 
 	string symbol() const;
   string value() const{
+    if(_value == "W") return "1";
     return _value;
   }
 	bool match(Term &term);
