@@ -1,7 +1,11 @@
 #include "variable.h"
+#include <iostream>
+using namespace std;
 
 Variable::Variable(string s):_symbol(s),_value(s){}
-string Variable::value(){ return _value; }
+/*string Variable::value() const{
+  return _value;
+}*/
 
 string Variable::symbol() const{
 	return _symbol;
@@ -30,8 +34,7 @@ bool Variable::match( Atom atom ){
     if(_assignable){
         _value = atom._symbol ;
         _assignable = false;
-    }
-	else{
+    }else{
         ret = (_value == atom.symbol());
     }
     return ret;

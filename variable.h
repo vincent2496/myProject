@@ -14,27 +14,29 @@ class Number;
 
 class Variable : public Term{
 public:
-    Variable(string s);//:_symbol(s){}
-    string const _symbol;
-	
+  Variable(string s);//:_symbol(s){}
+  string const _symbol;
+
 	string symbol() const;
-    string value();
+  string value() const{
+    return _value;
+  }
 	bool match(Term &term);
-    bool match(Atom atom);
-    bool match(Number num);	
-	
+  bool match(Atom atom);
+  bool match(Number num);
+
 	bool getAssignable();
 	bool setAssignable();
 	bool setNonAssignable();
 	bool setSymbol(string string);
-	
-    friend class Atom;
+
+  friend class Atom;
 	friend class Number;
-private:
+  private:
     string _value;
 	//string _symbol;
     bool _assignable = true;
-	
+
 };
 
 #endif

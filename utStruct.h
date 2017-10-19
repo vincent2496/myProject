@@ -95,14 +95,13 @@ TEST(Struct, var)
 // and #value() should also return "s(tom)"
 TEST(Struct, var_match_atom)
 {
-	Variable variable1("X");
-	vector<Term *> v = {&variable1};	
-	Atom atom("tom");
-	variable1.match(atom);
-	Struct struct1(Atom("s"), v);
-	
-	ASSERT_EQ("s(X)", struct1.symbol());
-	ASSERT_EQ("s(X)", struct1.value());
+  Variable X("X");
+  Atom tom("tom");
+  X.match(tom);
+  std::vector<Term *> v = {&X};
+  Struct s(Atom("s"), v);
+  ASSERT_EQ("s(X)",s.symbol());
+  ASSERT_EQ("s(tom)",s.value()); //override
 }
 
 // Given there are Struct s1 and Struct s2
@@ -115,10 +114,10 @@ TEST(Struct, nested_struct1)
 	Variable variable1("X");
 	vector<Term *> v1 = {&variable1};
 	Struct struct2(Atom("s2"), v1);
-	
+
 	vector<Term *> v2 = {&struct2};
 	Struct struct1(Atom("s1"), v2);
-	
+
 	ASSERT_EQ("s1(s2(X))", struct1.symbol());
 	ASSERT_EQ("s1(s2(X))", struct1.value());
 }
@@ -134,11 +133,11 @@ TEST(Struct, nested_struct2)
 	Atom atom("tom");
 	variable1.match(atom);
 	vector<Term *> v1 = {&variable1};
-		
+
 	Struct struct2(Atom("s2"), v1);
 	vector<Term *> v2 = {&struct2};
 	Struct struct1(Atom("s1"), v2);
-	
+
 	ASSERT_EQ("s1(s2(X))", struct1.symbol());
 	ASSERT_EQ("s1(s2(X))", struct1.value());
 }
@@ -152,13 +151,13 @@ TEST(Struct, nested_struct3)
 {
 	Variable variable1("X");
 	Number number(3.14);
-	variable1.match(number);	
+	variable1.match(number);
 	vector<Term *> v1 = {&variable1};
-		
+
 	Struct struct2(Atom("s2"), v1);
 	vector<Term *> v2 = {&struct2};
 	Struct struct1(Atom("s1"), v2);
-	
+
 	//ASSERT_EQ("s1(s2(X))", struct1.symbol());
 	//ASSERT_EQ("s1(s2(X))", struct1.value());
 }
@@ -174,15 +173,15 @@ TEST(Struct, nested_struct_and_multiVariable)
 	Variable variable1("X");
 	Variable variable2("Y");
 	variable1.match(variable2);
-	
+
 	Atom atom("kent_beck");
 	variable1.match(atom);
 	vector<Term *> v1 = {&variable2};
-	
+
 	Struct struct2(Atom("s2"), v1);
 	vector<Term *> v2 = {&struct2, &variable1};
 	Struct struct1(Atom("s1"), v2);
-	
+
 	//ASSERT_EQ("s1(s2(Y), X)", struct1.symbol());
 	//ASSERT_EQ("s1(s2(kent_beck), kent_beck)", struct1.value());
 }
