@@ -5,21 +5,23 @@
 #include <string>
 #include "atom.h"
 #include "variable.h"
-//#include "term.h"
+#include "term.h"
 
 using namespace std;
 
 class Atom;
 class Variable;
 
-class Number{// : public Term{
+class Number : public Term{
 public:
     Number(double i);
-    string symbol();
+    string symbol() const;
     string value();  
-    bool match(Number number);
-    bool match(Atom atom);
+	
+    //bool match(Number number);
+    //bool match(Atom atom);
 	bool match(Variable &variable);
+	bool match(Term &term);
 private:
     double _value = 0;
 	string _symbol = "";

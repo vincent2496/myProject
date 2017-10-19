@@ -28,6 +28,14 @@ public:
     ret += _args[_args.size()-1]->symbol() + ")";
     return  ret;
   }
+  string value(){
+    string ret =_name.value() + "(";
+    for(int i = 0; i<_args.size()-1; i++){
+      ret += _args[i]-> value() + ", ";
+    }
+    ret += _args[_args.size()-1]->value() + ")";
+    return  ret;
+  }
   bool match(Term &term){
     Struct * ps = dynamic_cast<Struct *>(&term);
     if (ps){

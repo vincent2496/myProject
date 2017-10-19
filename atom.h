@@ -20,8 +20,8 @@ public:
     //bool operator ==(Atom a) {return _symbol == a._symbol;}
     //string symbol();
     string symbol() const;
-	bool match(Number number);
-	bool match(Variable &variable);
+	//bool match(Number number);
+	//bool match(Variable &variable);
 	//bool match(Atom &atom);
 	bool match(Term &term);
     friend class Variable;

@@ -177,15 +177,12 @@ TEST(Struct, nested_struct_and_multiVariable)
 	
 	Atom atom("kent_beck");
 	variable1.match(atom);
+	vector<Term *> v1 = {&variable2};
 	
-	Number number(3.14);
-	variable1.match(number);	
-	vector<Term *> v1 = {&variable1};
-		
 	Struct struct2(Atom("s2"), v1);
-	vector<Term *> v2 = {&struct2};
+	vector<Term *> v2 = {&struct2, &variable1};
 	Struct struct1(Atom("s1"), v2);
 	
-	ASSERT_EQ("s1(s2(X))", struct1.symbol());
-	ASSERT_EQ("s1(s2(X))", struct1.value());
+	ASSERT_EQ("s1(s2(Y), X)", struct1.symbol());
+	ASSERT_EQ("s1(s2(kent_beck), kent_beck)", struct1.value());
 }

@@ -5,6 +5,7 @@
 #include "atom.h"
 #include "number.h"
 #include "term.h"
+//#include "struct.h"
 
 using namespace::std;
 
