@@ -5,6 +5,7 @@
 #include "variable.h"
 #include "number.h"
 #include "term.h"
+//#include "struct.h"
 
 using std::string;
 using namespace::std;
@@ -25,7 +26,7 @@ public:
 	//bool match(Atom &atom);
 	bool match(Term &term);
     friend class Variable;
-private:
+//private:
     string _symbol;
 };
 

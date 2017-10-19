@@ -1,5 +1,5 @@
 #include "number.h"
-#include <iostream>
+
 using namespace std;
 
 Atom::Atom (string s):_symbol(s) {}
@@ -8,9 +8,8 @@ string Atom::symbol() const{
     return _symbol;
 }
 
-/*bool Atom::match(Term &term){
+bool Atom::match(Term &term){
 	Variable *variable = dynamic_cast<Variable*>(&term);
-
     if (variable){
 		bool ret = variable->getAssignable();
 		if(variable->getAssignable() == true ){
@@ -21,24 +20,6 @@ string Atom::symbol() const{
 		else{ret =false;}
 	}
 	else{return term.symbol() == symbol();}
-}*/
-  bool Atom::match(Term &term){
-    cout << "11111111" << endl;
-    bool ret = false;
-    Variable *pt = dynamic_cast<Variable*>(&term);
-    if(pt){
-      if(pt->getAssignable()){
-        pt->setNonAssignable();
-  			ret = true;
-  			pt->match(*this);
-      }else{
-        ret = (_symbol == term.symbol());
-      }
-    }else{
-      ret = (_symbol == term.symbol());
-    }
-    return ret;
-  }
 
 //	  variable->match(*this);
 //	  variable->_assignable = false;
@@ -46,6 +27,9 @@ string Atom::symbol() const{
 //    }
 //    else
 //        return _symbol == variable->value();
+
+
+}
 
 /*
 bool Atom::match(Variable &variable){

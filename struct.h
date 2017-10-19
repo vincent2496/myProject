@@ -4,8 +4,12 @@
 #include "atom.h"
 #include <vector>
 #include <string>
+#include <iostream>
+using namespace std;
 
-using std::string;
+
+class Number;
+class variable;
 
 class Struct : public Term
 {
@@ -21,15 +25,16 @@ public:
     return _name;
   }
   string symbol() const{
+
     string ret =_name.symbol() + "(";
-    for(int i = 0; i < _args.size() - 1 ; i++){
+    for(int i = 0; i<_args.size()-1; i++){
       ret += _args[i]-> symbol() + ", ";
     }
-    ret += _args[_args.size()-1]-> symbol() + ")";
+    ret += _args[_args.size()-1]->symbol() + ")";
     return  ret;
   }
+  string value() const{
 
-  string value(){
     string ret =_name.value() + "(";
     for(int i = 0; i<_args.size()-1; i++){
       ret += _args[i]-> value() + ", ";
@@ -37,7 +42,6 @@ public:
     ret += _args[_args.size()-1]->value() + ")";
     return  ret;
   }
-
   bool match(Term &term){
     Struct * ps = dynamic_cast<Struct *>(&term);
     if (ps){

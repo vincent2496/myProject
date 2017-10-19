@@ -16,15 +16,18 @@ class Number : public Term{
 public:
     Number(double i);
     string symbol() const;
-    string value();  
+    //string value();  
 	
     //bool match(Number number);
     //bool match(Atom atom);
-	bool match(Variable &variable);
+	//bool match(Variable &variable);
 	bool match(Term &term);
 private:
-    double _value = 0;
-	string _symbol = "";
+    //string _value = 0;
+	//string _symbol = "";
+	string _symbol;
+	string _value;
+
 } ;
 
 #endif 

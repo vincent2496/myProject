@@ -2,10 +2,11 @@
 #define VARIABLE_H
 
 #include <string>
+#include <vector>
 #include "atom.h"
 #include "number.h"
 #include "term.h"
-//#include "struct.h"
+
 
 using namespace::std;
 
@@ -14,30 +15,31 @@ class Number;
 
 class Variable : public Term{
 public:
-  Variable(string s);//:_symbol(s){}
-  string const _symbol;
+    Variable(string s);//:_symbol(s){}
+    string const _symbol;
 
 	string symbol() const;
-  string value() const{
-    if(_value == "W") return "1";
-    return _value;
-  }
+    string value() const;
 	bool match(Term &term);
-  bool match(Atom atom);
-  bool match(Number num);
+    //bool match(Atom atom);
+    //bool match(Number num);
 
 	bool getAssignable();
-	bool setAssignable();
-	bool setNonAssignable();
+	bool setAssignable(bool assignable);
+	void setNonAssignable();
 	bool setSymbol(string string);
-
-  friend class Atom;
+  void setValue(string str);
+	void setVariableValue(string s);
+	void setVariable(Variable *variable);
+	friend class Atom;
 	friend class Number;
-  private:
+private:
     string _value;
-	//string _symbol;
     bool _assignable = true;
+	  vector<Variable *> _variable;
 
+	bool _isStruct = false;
+    static string temp;
 };
 
 #endif
