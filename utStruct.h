@@ -169,8 +169,4 @@ TEST(Struct, nested_struct3)
 // And Variable X matches Atom "kent_beck"
 // Then #symbol() of s1 should return "s1(s2(Y), X)"
 // and #value() of s1 should return "s1(s2(kent_beck), kent_beck)"
-TEST(Struct, nested_struct_and_multiVariable)
-{
-
-}
 
