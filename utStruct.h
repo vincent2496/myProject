@@ -82,9 +82,7 @@ TEST(Struct, match5)
 TEST(Struct, var)
 {
 	Variable variable1("X");
-	//Atom tom("tom");
-	//std::vector<Term *> v = {&tom};
-	std::vector<Term *> v = {&variable1};
+	vector<Term *> v = {&variable1};
 	//the type of struct name is "Atom type"
 	Struct struct1(Atom("s"), v);
 	ASSERT_EQ("s(X)", struct1.symbol());
@@ -98,10 +96,13 @@ TEST(Struct, var)
 TEST(Struct, var_match_atom)
 {
 	Variable variable1("X");
-	std::vector<Term *> v = {&variable1};	
+	vector<Term *> v = {&variable1};	
 	Atom atom("tom");
 	variable1.match(atom);
+	Struct struct1(Atom("s"), v);
 	
+	ASSERT_EQ("s(X)", struct1.symbol());
+	ASSERT_EQ("s(X)", struct1.value());
 }
 
 // Given there are Struct s1 and Struct s2
@@ -111,7 +112,15 @@ TEST(Struct, var_match_atom)
 // and #value() of s1 should also return "s1(s2(X))"
 TEST(Struct, nested_struct1)
 {
-
+	Variable variable1("X");
+	vector<Term *> v1 = {&variable1};
+	Struct struct2(Atom("s2"), v1);
+	
+	vector<Term *> v2 = {&struct2};
+	Struct struct1(Atom("s1"), v2);
+	
+	ASSERT_EQ("s1(s2(X))", struct1.symbol());
+	ASSERT_EQ("s1(s2(X))", struct1.value());
 }
 
 // Given there are Struct s1 contains Struct s2
@@ -121,7 +130,17 @@ TEST(Struct, nested_struct1)
 // and #value() of s1 should return "s1(s2(tom))"
 TEST(Struct, nested_struct2)
 {
-
+	Variable variable1("X");
+	Atom atom("tom");
+	variable1.match(atom);
+	vector<Term *> v1 = {&variable1};
+		
+	Struct struct2(Atom("s2"), v1);
+	vector<Term *> v2 = {&struct2};
+	Struct struct1(Atom("s1"), v2);
+	
+	ASSERT_EQ("s1(s2(X))", struct1.symbol());
+	ASSERT_EQ("s1(s2(X))", struct1.value());
 }
 
 // Given there are Struct s1 contains Struct s2
@@ -131,7 +150,17 @@ TEST(Struct, nested_struct2)
 // and #value() of s1 should return "s1(s2(3.14))"
 TEST(Struct, nested_struct3)
 {
-
+	Variable variable1("X");
+	Number number(3.14);
+	variable1.match(number);	
+	vector<Term *> v1 = {&variable1};
+		
+	Struct struct2(Atom("s2"), v1);
+	vector<Term *> v2 = {&struct2};
+	Struct struct1(Atom("s1"), v2);
+	
+	ASSERT_EQ("s1(s2(X))", struct1.symbol());
+	ASSERT_EQ("s1(s2(X))", struct1.value());
 }
 
 // Given there are Struct s1 contains Struct s2 and Variable X
