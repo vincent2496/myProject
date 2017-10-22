@@ -5,7 +5,7 @@
 #include "variable.h"
 #include "number.h"
 #include "term.h"
-//#include "struct.h"
+//#include "struct.h
 
 using std::string;
 using namespace::std;

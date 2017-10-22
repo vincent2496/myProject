@@ -90,11 +90,6 @@ TEST(Struct, var_match_atom){
   Struct s(Atom("s"), v);
   ASSERT_EQ("s(X)",s.symbol());
   ASSERT_EQ("s(tom)",s.value()); //override
-  /*  ok
-   *  10/15 variable 的 value 沒有override 所以一直去call symbol
-   *  改為const 就可以 override 但一直有問題
-   */
-
 }
 
 // Given there are Struct s1 and Struct s2

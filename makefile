@@ -1,15 +1,15 @@
 INC_DIR = include
 
-all: hw3
+all: hw4
 
-hw3: main.o number.o variable.o atom.o struct.o
+hw4: main.o number.o variable.o atom.o struct.o
 ifeq (${OS}, Windows_NT)
-	g++ -o hw3 main.o number.o variable.o atom.o struct.o -lgtest
+	g++ -o hw4 main.o number.o variable.o atom.o struct.o -lgtest
 else
-	g++ -o hw3 main.o number.o variable.o atom.o struct.o -lgtest -lpthread
+	g++ -o hw4 main.o number.o variable.o atom.o struct.o -lgtest -lpthread
 endif
 
-main.o: main.cpp utStruct.h utVariable.h  
+main.o: main.cpp #utStruct.h utVariable.h
 	g++ -std=gnu++0x -c main.cpp
 number.o: number.h atom.h variable.h number.cpp
 	g++ -std=gnu++0x -c number.cpp
