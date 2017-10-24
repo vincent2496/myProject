@@ -1,6 +1,8 @@
 #include "variable.h"
 #include <iostream>
+
 using namespace std;
+
 Variable::Variable(string s):_symbol(s),_value(s){}
 string Variable::value() const{
   if(_value == "W") return "1";
@@ -30,39 +32,11 @@ void Variable::setNonAssignable(){
 bool Variable::setAssignable(bool assignable){
 	_assignable = assignable;
 }
-/*
-bool Variable::setNonAssignable(){
-	return false;
-}
-*/
+
 bool Variable::setSymbol(string string){
 	return false;
 }
 
-/*
-bool Variable::match( Atom atom ){
-    bool ret = _assignable;
-    if(_assignable){
-        _value = atom._symbol ;
-        _assignable = false;
-    }
-	else{
-        ret = (_value == atom.symbol());
-    }
-    return ret;
-}
-
- bool Variable::match( Number number ){
-    bool ret = _assignable;
-    if(_assignable){
-        _value = number.value() ;
-        _assignable = false;
-    }else{
-         ret = (_value == number.value());
-    }
-    return ret;
-}
-*/
 bool Variable::match(Term &term){
     Variable *var = dynamic_cast<Variable *>(&term);
     bool ret = _assignable;
@@ -88,9 +62,7 @@ bool Variable::match(Term &term){
             _assignable = false;
             ret = true;
         }
-        else{
-            ret = false;
-        }
+        else{ ret = false;}
     }
     return ret;
 }

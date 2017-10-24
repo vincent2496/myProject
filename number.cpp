@@ -1,6 +1,4 @@
 #include "number.h"
-#include <string>
-#include <sstream>
 
 using namespace std;
 

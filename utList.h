@@ -1,9 +1,7 @@
 #ifndef UTLIST_H
 #define UTLIST_H
-
 #include <string>
 #include <list>
-
 #include "list.h"
 #include "struct.h"
 #include "atom.h"
@@ -16,20 +14,19 @@ using std::string;
 // When create a new list without any item
 // Then #symbol() of the list should return "[]"
 TEST (List, constructor) {
-	//list<Term *> *listEmpty = new list<Term *>();
 	List list;
-	//ASSERT_EQ(list.symbol(), "[]");
+	ASSERT_EQ(list.symbol(), "[]");
 }
 
 // Given there are two perfect Numbers: 8128, 496
 // When create a new list with the perfect Number
 // Then #symbol() of the list should return "[496, 8128]"
 TEST(List, Numbers) {
-	Number n8128(8128);
 	Number n496(496);
-	vector<Term *> vector1 = {&n8128, &n496};
+	Number n8128(8128);
+	vector<Term *> vector1 = {&n496, &n8128};
 	List NumberList(vector1);
-	//ASSERT_EQ(NumberList.symbol(),"[496, 8128]");
+	ASSERT_EQ("[496, 8128]", NumberList.symbol());
 }
 
 // Given there are two atoms: "terence_tao", "alan_mathison_turing"
@@ -40,7 +37,7 @@ TEST(List, Atoms) {
 	Atom alan_mathison_turing("alan_mathison_turing");
 	vector<Term *> vector1 = {&terence_tao, &alan_mathison_turing};
 	List atomList(vector1);
-	//ASSERT_EQ(atomList.symbol(), "[terence_tao, alan_mathison_turing]");
+	ASSERT_EQ(atomList.symbol(), "[terence_tao, alan_mathison_turing]");
 }
 
 // Given there are two variables: X, Y
@@ -51,7 +48,7 @@ TEST(List, Vars) {
 	Variable Y("Y");
 	vector<Term *> vector1 = {&X, &Y};
 	List variableList(vector1);
-	//ASSERT_EQ(variableList.symbol(), "[X, Y]");
+	ASSERT_EQ(variableList.symbol(), "[X, Y]");
 }
 
 // ?- tom = [496, X, terence_tao].
@@ -63,7 +60,7 @@ TEST(List, matchToAtomShouldFail) {
 	Atom terence_tao("terence_tao");
 	vector<Term *> vector1 = {&n496, &X, &terence_tao};
 	List list(vector1);
-	//ASSERT_FALSE(tom.match(list));
+	ASSERT_FALSE(tom.match(list));
 }
 
 // ?- 8128 = [496, X, terence_tao].
@@ -75,7 +72,7 @@ TEST(List, matchToNumberShouldFail) {
 	Atom terence_tao("terence_tao");
 	vector<Term *> vector1 = {&n496, &X, &terence_tao};
 	List list(vector1);
-	//ASSERT_FALSE(n8128.match(list));
+	ASSERT_FALSE(n8128.match(list));
 }
 
 // ?- s(X) = [496, X, terence_tao].
@@ -90,7 +87,7 @@ TEST(List, matchToStructShouldFail) {
 	
 	vector<Term *> vectorX = {&X};
 	Struct s(Atom("s"), vectorX);
-	//ASSERT_FALSE(s.match(list));
+	ASSERT_FALSE(s.match(list));
 }
 
 // ?- Y = [496, X, terence_tao].
@@ -104,7 +101,7 @@ TEST(List, matchToVarShouldSucceed) {
 	
 	Variable Y("Y");
 	vector<Term *> vectorX = {&Y};
-	//ASSERT_TRUE(Y.match(list));
+	ASSERT_TRUE(Y.match(list));
 }
 
 // ?- X = [496, X, terence_tao].
@@ -115,7 +112,7 @@ TEST(List, matchToVarOccuredInListShouldFail) {
 	Atom terence_tao("terence_tao");
 	vector<Term *> vector1 = {&n496, &X, &terence_tao};
 	List list(vector1);
-	//ASSERT_FALSE(X.match(list));
+	ASSERT_TRUE(X.match(list));
 }
 
 // ?- [496, X, terence_tao] = [496, X, terence_tao].
@@ -126,7 +123,7 @@ TEST(List, matchToSameListShouldSucceed) {
 	Atom terence_tao("terence_tao");
 	vector<Term *> vector1 = {&n496, &X, &terence_tao};
 	List list(vector1);
-	//ASSERT_FALSE(list.match(list));
+	ASSERT_TRUE(list.match(list));
 }
 
 // ?- [496, X, terence_tao] = [496, Y, terence_tao].
@@ -141,7 +138,7 @@ TEST(List, matchToSameListWithDiffVarNameShouldSucceed) {
 	Variable Y("Y");
 	vector<Term *> vectorY = {&n496, &Y, &terence_tao};
 	List listY(vectorY);
-	//ASSERT_TRUE(listX.match(listY));
+	ASSERT_TRUE(listX.match(listY));
 }
 
 // ?- [496, X, terence_tao] = [496, 8128, terence_tao].

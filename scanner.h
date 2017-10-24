@@ -1,8 +1,6 @@
 #ifndef SCANNER_H
 #define SCANNER_H
-
 #include "global.h"
-
 #include <string>
 #include <vector>
 

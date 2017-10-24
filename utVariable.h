@@ -2,7 +2,6 @@
 #define UTVARIABLE_H
 #include "variable.h"
 
-
 TEST(Variable, constructor){
   Variable X("X");
   ASSERT_EQ("X", X._symbol);

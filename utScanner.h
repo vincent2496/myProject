@@ -1,6 +1,5 @@
 #ifndef UTSCANNER_H
 #define UTSCANNER_H
-
 #include "scanner.h"
 
 class ScannerTest : public ::testing::Test {

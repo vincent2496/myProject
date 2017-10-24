@@ -1,6 +1,5 @@
 #ifndef UTTERM_H
 #define UTTERM_H
-
 #include <gtest/gtest.h>
 #include <iostream>
 #include <string>
