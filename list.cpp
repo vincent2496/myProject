@@ -7,7 +7,7 @@ string List::symbol() const{
         ret = ret + "]";
     }
 	else{
-		for(int i = 0; i<_elements.size(); i++){
+		for(int i=0; i<_elements.size(); i++){
 			ret = ret + _elements[i]->symbol();		
 			if(i<_elements.size()-1){ret = ret + ", ";}
 			}
@@ -23,7 +23,7 @@ string List::value() const{
         ret = ret + "]";
     }
 	else{
-		for(int i = 0; i<_elements.size(); i++){
+		for(int i=0; i<_elements.size(); i++){
 			ret = ret + _elements[i]->symbol() + ", ";
 		}
 		ret = ret + _elements[_elements.size()-1]->symbol() + "]";
@@ -48,5 +48,10 @@ Term * List::head() const{
 
 
 List * List::tail() const{
-	
+	if(_elements.size() < 1)
+    {
+        string s = "Accessing tail in an empty list";
+        throw s;
+    }
+    //return _elements[0];
 }
