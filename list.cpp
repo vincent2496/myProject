@@ -22,11 +22,20 @@ string List::value() const{
 	if(_elements.empty()){
         ret = ret + "]";
     }
+	/*
 	else{
 		for(int i=0; i<_elements.size(); i++){
 			ret = ret + _elements[i]->symbol() + ", ";
 		}
 		ret = ret + _elements[_elements.size()-1]->symbol() + "]";
+	}
+	*/
+	else{
+		for(int i=0; i<_elements.size(); i++){
+			ret = ret + _elements[i]->symbol();		
+			if(i<_elements.size()-1){ret = ret + ", ";}
+			}
+		ret = ret + "]";	
 	}
 	return ret;
 }

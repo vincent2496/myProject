@@ -188,7 +188,7 @@ TEST(List, headAndTailMatching1) {
 
     EXPECT_EQ(list.head()->symbol(), "first");
     EXPECT_EQ(list.tail()->symbol(), "[second, third]");
-  //EXPECT_EQ(list.tail()->value(), "[second, third]");
+    EXPECT_EQ(list.tail()->value(), "[second, third]");
 }
 
 // Example:
