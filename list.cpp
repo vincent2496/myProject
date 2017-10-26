@@ -54,5 +54,5 @@ List * List::tail() const{
         string s = "Accessing tail in an empty list";
         throw s;
     }
-    return _elements[0];
+    //return _elements[0];
 }
