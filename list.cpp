@@ -61,33 +61,28 @@ bool List::match(Term & term){
 
     bool ret = true;
     if(pl){
-		cout<<"1"<<endl;
+		//cout<<"1"<<endl;
         if(_elements.size() != pl->elements().size()){
-        cout<<"2"<<endl;        
+        //cout<<"2"<<endl;        
 		ret = false;
         }else
-		cout<<"3"<<endl;
+		//cout<<"3"<<endl;
 		{
             for(int i = 0; i < _elements.size(); i++){
-                if(_elements[i]->match( *(pl->elements()[i]) )!=true){
-                    ret = true;
-                }
+                if(_elements[i]->match( *(pl->elements()[i]) )!=true)
+				{ret = true;}
             }
         }
     }
-    else if(pv){cout<<"4"<<endl;
+    else if(pv){//cout<<"4"<<endl;
         ret = pv->match(*this);
     }
-    else{cout<<"5"<<endl;
+    else{//cout<<"5"<<endl;
         ret = false;
     }
     return ret;
 
 }
-
-/*
-    
-*/
 
 Term * List::element(int i)
 {

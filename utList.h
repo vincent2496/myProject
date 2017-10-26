@@ -171,9 +171,10 @@ TEST(List, matchVarinListToAtomShouldSucceed) {
 	List list1(vector1);
 	Variable Y("Y");
 	Atom alan_mathison_turing("alan_mathison_turing");
+	ASSERT_TRUE(Y.match(list1));
 	ASSERT_TRUE(X.match(alan_mathison_turing));		
 	ASSERT_EQ(X.value(), "alan_mathison_turing");
-	ASSERT_TRUE(Y.match(list1));	
+		
 	ASSERT_EQ(Y.value(), "[496, alan_mathison_turing, terence_tao]");	
 }
 

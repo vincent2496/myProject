@@ -3,6 +3,7 @@
 #include "atom.h"
 #include "number.h"
 #include "term.h"
+#include "list.h"
 #include <string>
 #include <vector>
 
@@ -33,6 +34,7 @@ private:
     bool _assignable = true;
 	bool _isStruct = false;
     static string temp;
+	Term *t;
 };
 
 #endif

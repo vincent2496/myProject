@@ -3,10 +3,17 @@
 
 using namespace std;
 
-Variable::Variable(string s):_symbol(s),_value(s){}
+Variable::Variable(string s):_symbol(s),_value(s), t(){
+}
+
 string Variable::value() const{
-  if(_value == "W") return "1";
-  return _value;
+	//return t->value();
+	
+	List *l = dynamic_cast<List *>(t);
+	if(l){
+		return t->value();
+	}
+    return _value;
 }
 
 void Variable::setVariable(Variable *variable){
@@ -39,14 +46,18 @@ bool Variable::setSymbol(string string){
 
 bool Variable::match(Term &term){
     Variable *var = dynamic_cast<Variable *>(&term);
-    bool ret = _assignable;
-    if(var){
+    
+	bool ret = _assignable;
+    //cout<<term.value()<<endl;
+	if(var){
         for(int i=0; i<_variable.size(); i++){
             if(_variable[i] == var){
                 return true;
             }
         }
         _value = term.value();
+		
+		
         _variable.push_back(var);
         var->match(*this);
         for(int i=0; i<_variable.size(); i++){
@@ -57,6 +68,11 @@ bool Variable::match(Term &term){
         if(_assignable || _value == term.value()){
 			//cout<< "2"<<endl;
             _value = term.value();
+			
+			
+			t = &term;
+			
+			
             for(int i=0; i<_variable.size(); i++){
                 _variable[i]->setValue(term.value());
                 _variable[i]->setAssignable(false);
