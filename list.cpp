@@ -48,12 +48,12 @@ Term * List::head() const{
 
 
 List * List::tail() const{
-	/*
+	
 	if(_elements.size() < 1)
     {
         string s = "Accessing tail in an empty list";
         throw s;
     }
-	*/
-    //return _elements[0];
+	
+    return _elements[0];
 }
