@@ -201,8 +201,8 @@ TEST(List, headAndTailMatching2) {
 	vector<Term *> vector1 = {&f, &s, &t};
 	List list(vector1);
 
-  //EXPECT_EQ(list.tail()->head()->value(), );
-  //EXPECT_EQ(list.tail()->tail()->value(), );
+    EXPECT_EQ(list.tail()->head()->value(), "second");
+    EXPECT_EQ(list.tail()->tail()->value(), "[third]");
 }
 
 // ?- [[first], second, third] = [H|T].
@@ -217,8 +217,8 @@ TEST(List, headAndTailMatching3) {
 	vector<Term *> vector2 = {&list1, &s, &t};
 	List list2(vector2);
 
-  //EXPECT_EQ(list2->head()->value(), "[first]");
-  //EXPECT_EQ(list2->tail()->value(), "[second, third]");
+    EXPECT_EQ(list2.head()->value(), "[first]");
+    EXPECT_EQ(list2.tail()->value(), "[second, third]");
 }
 
 // ?- [first, second, third] = [first, second, H|T].
@@ -229,8 +229,8 @@ TEST(List, headAndTailMatching4) {
 	Atom t("third");
 	vector<Term *> vector1 = {&f, &s, &t};
 	List list1(vector1);
-	//EXPECT_EQ(list1->tail()->tail()->head()->value(), "third");
-    //EXPECT_EQ(list1->tail()->tail()->tail()->value(), "[]");
+	EXPECT_EQ(list1.tail()->tail()->head()->value(), "third");
+    EXPECT_EQ(list1.tail()->tail()->tail()->value(), "[]");
 }
 
 // Given there is a empty list
