@@ -56,33 +56,37 @@ List * List::tail() const
 }
 
 bool List::match(Term & term){
-
-
-}
-
-/*
     List * pl = dynamic_cast<List *>(&term);
     Variable * pv = dynamic_cast<Variable *>(&term);
 
     bool ret = true;
     if(pl){
+		cout<<"1"<<endl;
         if(_elements.size() != pl->elements().size()){
-            ret = false;
-        }else{
+        cout<<"2"<<endl;        
+		ret = false;
+        }else
+		cout<<"3"<<endl;
+		{
             for(int i = 0; i < _elements.size(); i++){
                 if(_elements[i]->match( *(pl->elements()[i]) )!=true){
-                    ret = false;
+                    ret = true;
                 }
             }
         }
     }
-    else if(pv){
+    else if(pv){cout<<"4"<<endl;
         ret = pv->match(*this);
     }
-    else{
+    else{cout<<"5"<<endl;
         ret = false;
     }
     return ret;
+
+}
+
+/*
+    
 */
 
 Term * List::element(int i)
