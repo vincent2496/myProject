@@ -37,13 +37,15 @@ bool List::match(Term & term){
 	
 }
 
-Term * List::head() const{
-	/*
-	if(_elements.size()){
-	    return "Accessing head in an empty list";	
-	}
-	*/
+Term * List::head() const{	
+    if(_elements.size() < 1)
+    {
+        string s = "Accessing head in an empty list";
+        throw s;
+    }
+    return _elements[0];
 }
+
 
 List * List::tail() const{
 	
