@@ -122,8 +122,10 @@ TEST(List, matchToSameListShouldSucceed) {
 	Variable X("X");
 	Atom terence_tao("terence_tao");
 	vector<Term *> vector1 = {&n496, &X, &terence_tao};
-	List list(vector1);
-	ASSERT_TRUE(list.match(list));
+	List list1(vector1);
+	vector<Term *> vector2 = {&n496, &X, &terence_tao};
+	List list2(vector2);
+	ASSERT_TRUE(list1.match(list2));
 }
 
 // ?- [496, X, terence_tao] = [496, Y, terence_tao].
@@ -133,12 +135,12 @@ TEST(List, matchToSameListWithDiffVarNameShouldSucceed) {
 	Variable X("X");
 	Atom terence_tao("terence_tao");
 	vector<Term *> vectorX = {&n496, &X, &terence_tao};
-	List listX(vectorX);
+	List list1(vectorX);
 	
 	Variable Y("Y");
 	vector<Term *> vectorY = {&n496, &Y, &terence_tao};
-	List listY(vectorY);
-	ASSERT_TRUE(listX.match(listY));
+	List list2(vectorY);
+	ASSERT_TRUE(list1.match(list2));
 }
 
 // ?- [496, X, terence_tao] = [496, 8128, terence_tao].
@@ -147,13 +149,14 @@ TEST(List, matchToVarToAtominListShouldSucceed) {
 	Number n496(496);
 	Variable X("X");
 	Atom terence_tao("terence_tao");
-	vector<Term *> vectorX = {&n496, &X, &terence_tao};
-	List listX(vectorX);
+	vector<Term *> vector1 = {&n496, &X, &terence_tao};
+	List list1(vector1);
 	
 	Number n8128(8128);
-	vector<Term *> vector8128 = {&n496, &n8128, &terence_tao};
-	List listY(vector8128);
-	//ASSERT_TRUE(vectorX.match(vector8128));
+	vector<Term *> vector2 = {&n496, &n8128, &terence_tao};
+	List list2(vector2);
+	ASSERT_TRUE(list1.match(list2));
+	ASSERT_EQ("8128", X.value());
 }
 
 // ?- Y = [496, X, terence_tao], X = alan_mathison_turing.
@@ -167,13 +170,11 @@ TEST(List, matchVarinListToAtomShouldSucceed) {
 	vector<Term *> vector1 = {&n496, &X, &terence_tao};
 	List list1(vector1);
 	Variable Y("Y");
-	
 	Atom alan_mathison_turing("alan_mathison_turing");
-	
-	//ASSERT_TRUE(Y.match(list1));
-	//ASSERT_TRUE(X.match(alan_mathison_turing));	
-	//ASSERT_EQ(Y.value(), "[496, alan_mathison_turing, terence_tao]");
-	//ASSERT_EQ(X.value(), "alan_mathison_turing");
+	ASSERT_TRUE(X.match(alan_mathison_turing));		
+	ASSERT_EQ(X.value(), "alan_mathison_turing");
+	ASSERT_TRUE(Y.match(list1));	
+	ASSERT_EQ(Y.value(), "[496, alan_mathison_turing, terence_tao]");	
 }
 
 // Example: 

@@ -53,7 +53,9 @@ bool Variable::match(Term &term){
             _variable[i]->match(term);
         }
     }else{
+		//cout<< "1"<<endl;
         if(_assignable || _value == term.value()){
+			//cout<< "2"<<endl;
             _value = term.value();
             for(int i=0; i<_variable.size(); i++){
                 _variable[i]->setValue(term.value());

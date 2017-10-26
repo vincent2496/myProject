@@ -2,7 +2,7 @@
 //#include "utTerm.h"
 //#include "utStruct.h"
 //#include "utVariable.h"
-#include "utScanner.h"
+//#include "utScanner.h"
 #include "utList.h"
 
 int main( int argc , char **argv )
