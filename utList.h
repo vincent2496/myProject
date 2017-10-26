@@ -186,8 +186,8 @@ TEST(List, headAndTailMatching1) {
 	vector<Term *> vector1 = {&f, &s, &t};
 	List list(vector1);
 
-  //EXPECT_EQ(list.head()->symbol(), "first");
-  //EXPECT_EQ(list.tail()->symbol(), "[second, third]");
+    EXPECT_EQ(list.head()->symbol(), "first");
+    EXPECT_EQ(list.tail()->symbol(), "[second, third]");
   //EXPECT_EQ(list.tail()->value(), "[second, third]");
 }
 
