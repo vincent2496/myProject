@@ -8,11 +8,13 @@ using std::string;
 #include "global.h"
 #include "scanner.h"
 #include "struct.h"
+#include "term.h"
 
 class Parser{
-public:
-  Parser(Scanner scanner) : _scanner(scanner){}
-  Term* createTerm(){
+	public:
+Parser(Scanner scanner) : _scanner(scanner){}
+
+Term* createTerm(){
     int token = _scanner.nextToken();
     if(token == VAR){
       return new Variable(symtable[_scanner.tokenValue()].first);
@@ -30,9 +32,9 @@ public:
           return atom;
     }
     return nullptr;
-  }
+ }
 
-  vector<Term*> getArgs()
+vector<Term*> getArgs()
   {
     Term* term = createTerm();
     vector<Term*> args;
@@ -42,12 +44,9 @@ public:
       args.push_back(createTerm());
     }
     return args;
-  }
-
-
-
+}
 private:
-  Scanner _scanner;
-  int _currentToken;
+    Scanner _scanner;
+    int _currentToken;
 };
 #endif
