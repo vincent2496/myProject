@@ -22,7 +22,7 @@ struct.o: variable.h atom.h number.h struct.cpp struct.h
 list.o: variable.h atom.h number.h struct.cpp list.h
 	g++ -std=gnu++0x -c list.cpp
 #parser.o: variable.h atom.h number.h struct.cpp parser.h
-	#g++ -std=gnu++0x -c parser.cpp
+#	g++ -std=gnu++0x -c parser.cpp
 	
 clean:
 ifeq (${OS}, Windows_NT)
