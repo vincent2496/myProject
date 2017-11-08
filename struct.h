@@ -14,7 +14,8 @@ class variable;
 class Struct : public Term
 {
 public:
-    Struct(Atom const & name, std::vector<Term *> args);
+    //Struct(Atom const & name, std::vector<Term *> args);
+	Struct(Atom name, std::vector<Term *> args);
     Term * args(int index);
     Atom const & name();
     string symbol() const;
