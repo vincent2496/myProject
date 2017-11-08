@@ -9,7 +9,7 @@ string List::symbol() const{
 	else{
 		for(int i=0; i<_elements.size(); i++){
 			ret = ret + _elements[i]->symbol();		
-			if(i<_elements.size()-1){ret = ret + ",";}
+			if(i<_elements.size()-1){ret = ret + ", ";}
 			}
 		ret = ret + "]";	
 	}
@@ -25,7 +25,7 @@ string List::value() const{
 	else{
 		for(int i=0; i<_elements.size(); i++){
 			ret = ret + _elements[i]->value();		
-			if(i<_elements.size()-1){ret = ret + ",";}			
+			if(i<_elements.size()-1){ret = ret + ", ";}			
 		}		
 		ret = ret + "]";	
 	}
