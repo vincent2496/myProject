@@ -10,7 +10,7 @@ string numberToString(double d){
 	return ret;
 }
 
-Number::Number(double d):_symbol(numberToString(d)),_value(numberToString(d)){}
+//Number::Number(double d):_symbol(numberToString(d)),_value(numberToString(d)){}
 
 string Number::symbol() const{
     return _symbol;

@@ -14,7 +14,8 @@ class Variable;
 
 class Number : public Term{
 public:
-    Number(double i);
+    Number(double db):Term(db) {}
+	//Number(double i);
     string symbol() const;
 	bool match(Term &term);
 private:
