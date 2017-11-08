@@ -11,7 +11,7 @@ string numberToString(double d){
 }
 
 //Number::Number(double d):_symbol(numberToString(d)),_value(numberToString(d)){}
-
+/*
 string Number::symbol() const{
     return _symbol;
 }
@@ -26,3 +26,4 @@ bool Number::match(Term &term){
         }else{ret = false;}
         return ret;}
 }
+*/
