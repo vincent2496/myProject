@@ -16,7 +16,7 @@ public:
     }
 	virtual int arity(){
 		return 0;
-	}
+	};
 };
 
 #endif
