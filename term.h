@@ -1,11 +1,10 @@
 #ifndef TERM_H
 #define TERM_H
-#include <string>
 
 #include <string>
 #include <sstream>
-using std::string;
 
+using std::string;
 using namespace std;
 
 class Term{
