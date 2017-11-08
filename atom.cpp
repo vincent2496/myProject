@@ -2,7 +2,7 @@
 
 using namespace std;
 
-Atom::Atom (string s):_symbol(s) {}
+//Atom::Atom (string s):_symbol(s) {}
 
 string Atom::symbol() const{
     return _symbol;

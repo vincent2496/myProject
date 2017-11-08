@@ -15,9 +15,9 @@ class Number;
 
 class Atom : public Term{
 public:
-    Atom(string s);
-    string symbol() const;
-
+    //Atom(string s);
+    Atom(string s):Term(s) {}
+	string symbol() const;
 	bool match(Term &term);
     friend class Variable;
 //private:
