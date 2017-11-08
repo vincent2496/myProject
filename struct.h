@@ -17,8 +17,9 @@ public:
     //Struct(Atom const & name, std::vector<Term *> args);
 	Struct(Atom name, std::vector<Term *> args);
     Term * args(int index);
-    Atom const & name();
-    string symbol() const;
+    //Atom const & name();
+    Atom & name();
+	string symbol() const;
     string value() const;
     bool match(Term &term);
 	int arity();

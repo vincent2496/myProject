@@ -1,16 +1,20 @@
 #include "struct.h"
 
-Struct::Struct(Atom , std::vector<Term *> args):_name(name), _args(args) {
+Struct::Struct(Atom name, std::vector<Term *> args):_name(name), _args(args) {
 }
 
 Term * Struct::args(int index) {
     return _args[index];
 }
 
+Atom & Struct::name() {
+    return _name;
+}
+/*
 Atom const & Struct::name() {
     return _name;
 }
-  
+*/
 string Struct::symbol() const{
 
     string ret =_name.symbol() + "(";
