@@ -8,12 +8,14 @@ class Term{
 
 public:
     virtual string symbol() const= 0;
-    virtual string value() const{
+    //virtual string symbol() const {return _symbol;}
+	virtual string value() const{
       return symbol();
     };
     virtual bool match(Term & term) {
       return symbol() == term.symbol();
     }
+	virtual int arity(){return 0;};
 };
 
 #endif
