@@ -28,3 +28,5 @@ ifeq (${OS}, Windows_NT)
 else
 	rm -f *.o exp
 endif
+stat:
+	wc *.h *.cpp
