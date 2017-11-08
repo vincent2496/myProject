@@ -16,23 +16,22 @@ public:
   Parser(Scanner scanner) : _scanner(scanner){}
   Term* createTerm(){
     int token = _scanner.nextToken();
-    
-	if(token == VAR){
-        return new Variable(symtable[_scanner.tokenValue()].first);
+    if(token == VAR){
+      return new Variable(symtable[_scanner.tokenValue()].first);
     }else if(token == NUMBER){
-        return new Number(_scanner.tokenValue());
+      return new Number(_scanner.tokenValue());
     }else if(token == ATOM || token == ATOMSC){
         Atom* atom = new Atom(symtable[_scanner.tokenValue()].first);
         if(_scanner.currentChar() == '(' ) {
+          _scanner.nextToken() ;
+          if (_scanner.currentChar() == ')'){
             _scanner.nextToken() ;
-            if (_scanner.currentChar() == ')'){
-                _scanner.nextToken() ;
-                vector<Term*> emptyTerms;
-                return new Struct(*atom, emptyTerms);
+            vector<Term*> emptyTerms;
+            return new Struct(*atom, emptyTerms);
           }
           vector<Term*> terms = getArgs();
           if(_currentToken == ')')
-                return new Struct(*atom, terms);
+            return new Struct(*atom, terms);
         }
         else
           return atom;
