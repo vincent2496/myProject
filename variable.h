@@ -16,7 +16,7 @@ class Variable : public Term{
 public:
     Variable(string s);	
     string const _symbol;
-	string symbol() const;
+	//string symbol() const;
     string value() const;	
 	bool match(Term &term);
 	bool getAssignable();
