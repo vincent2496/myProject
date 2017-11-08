@@ -14,13 +14,13 @@ class Variable;
 
 class Number : public Term{
 public:
-    Number(double db):Term(db) {}
-	//Number(double i);
-    //string symbol() const;
-	//bool match(Term &term);
+    //Number(double db):Term(db) {}
+	Number(double i);
+    string symbol() const;
+	bool match(Term &term);
 private:
-	//string _symbol;
-	//string _value;
+	string _symbol;
+	string _value;
 } ;
 
 #endif 

@@ -14,11 +14,11 @@ class variable;
 class Struct : public Term
 {
 public:
-    //Struct(Atom const & name, std::vector<Term *> args);
-	Struct(Atom name, std::vector<Term *> args);
+    Struct(Atom const & name, std::vector<Term *> args);
+	//Struct(Atom name, std::vector<Term *> args);
     Term * args(int index);
-    //Atom const & name();
-    Atom & name();
+    Atom const & name();
+    //Atom & name();
 	string symbol() const;
     string value() const;
     bool match(Term &term);

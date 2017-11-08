@@ -16,16 +16,16 @@ public:
 		return _symbol;
 	}
 	virtual string value() const{
-      return symbol();
+        return symbol();
     }
-    virtual bool match(Term & term) {
-      return symbol() == term.symbol();
+    virtual bool match(Term & term){
+        return symbol() == term.symbol();
     }
 	virtual int arity(){
 		return 0;
 	}
 protected:
-    Term ():_symbol(""){}
+    Term():_symbol(""){}
 	string _symbol;
 	Term (string s):_symbol(s) {}
 	Term(double db){
