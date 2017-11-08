@@ -23,11 +23,11 @@ void Variable::setVariable(Variable *variable){
 void Variable::setVariableValue(string s){
     _value = s;
 }
-/*
+
 string Variable::symbol() const{
 	return _symbol;
 }
-*/
+
 bool Variable::getAssignable(){
 	return _assignable;
 }
