@@ -24,6 +24,7 @@ public:
 protected:
     Term ():_symbol(""){}
 	string _symbol;
+	Term (string s):_symbol(s) {}
 };
 
 #endif
