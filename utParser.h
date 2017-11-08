@@ -227,7 +227,7 @@ TEST_F(ParserTest, parseStructOfStructAllTheWay2) {
     //ASSERT_EQ("b(1, 2, 3)", terms[1]->symbol());
 }
 
-/*
+
 // Given there is string: "point()" in scanner.
 // When parser parses all terms via scanner.
 // Then it should return a Struct.
@@ -237,7 +237,7 @@ TEST_F(ParserTest, parseStructNoArg) {
 	Parser parser(scanner);
     //ASSERT_EQ("point()", parser.createTerm()->symbol());
 }
-*/
+
 
 // Given there is string: " 12345,  tom,   Date" in scanner.
 // When parser parses all terms via scanner.
