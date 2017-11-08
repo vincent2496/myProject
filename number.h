@@ -19,8 +19,8 @@ public:
     //string symbol() const;
 	//bool match(Term &term);
 private:
-	string _symbol;
-	string _value;
+	//string _symbol;
+	//string _value;
 } ;
 
 #endif 
