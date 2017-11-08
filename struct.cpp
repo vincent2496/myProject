@@ -22,6 +22,10 @@
   string Struct::value() const{
 
     string ret =_name.value() + "(";
+	if (_args.empty()){
+      ret += ")";
+      return ret;
+    }
     for(int i = 0; i<_args.size()-1; i++){
       ret += _args[i]-> value() + ", ";
     }
