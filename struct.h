@@ -20,7 +20,6 @@ public:
     string symbol() const;
     string value() const;
     bool match(Term &term);
-	
 	int arity();
 private:
     Atom _name;
