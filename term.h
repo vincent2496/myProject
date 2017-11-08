@@ -17,8 +17,8 @@ public:
     }
 	virtual int arity(){return 0;};
 protected:
-  Term ():_symbol(""){}
-  Term (string s):_symbol(s) {}	
+    Term ():_symbol(""){}
+    Term (string s):_symbol(s) {}	
     string _symbol;
 };
 
