@@ -2,6 +2,10 @@
 #define TERM_H
 #include <string>
 
+#include <string>
+#include <sstream>
+using std::string;
+
 using namespace std;
 
 class Term{
@@ -25,6 +29,11 @@ protected:
     Term ():_symbol(""){}
 	string _symbol;
 	Term (string s):_symbol(s) {}
+	Term(double db){
+        std::ostringstream strs;
+        strs << db;
+    _symbol = strs.str();
+  }
 };
 
 #endif
