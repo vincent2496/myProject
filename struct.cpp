@@ -13,6 +13,12 @@
   string Struct::symbol() const{
 
     string ret =_name.symbol() + "(";
+	
+	if (_args.empty()){
+      ret += ")";
+      return ret;
+    }
+	
     for(int i = 0; i<_args.size()-1; i++){
       ret += _args[i]-> symbol() + ", ";
     }
@@ -22,14 +28,16 @@
   string Struct::value() const{
 
     string ret =_name.value() + "(";
-
-    for(int i = 0; i<_args.size()-1; i++){
-      ret += _args[i]-> value() + ", ";
-    }
-		if (_args.empty()){
+	
+	if (_args.empty()){
       ret += ")";
       return ret;
     }
+	
+    for(int i = 0; i<_args.size()-1; i++){
+      ret += _args[i]-> value() + ", ";
+    }
+
     ret += _args[_args.size()-1]->value() + ")";
     return  ret;
   }
