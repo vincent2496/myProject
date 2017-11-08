@@ -16,6 +16,10 @@ public:
       return symbol() == term.symbol();
     }
 	virtual int arity(){return 0;};
+protected:
+  Term ():_symbol(""){}
+  Term (string s):_symbol(s) {}	
+    string _symbol;
 };
 
 #endif
