@@ -1,16 +1,17 @@
 #include "struct.h"
 
-  Struct::Struct(Atom const & name, std::vector<Term *> args):_name(name), _args(args) {
-  }
+Struct::Struct(Atom const & name, std::vector<Term *> args):_name(name), _args(args) {
+}
 
-  Term * Struct::args(int index) {
+Term * Struct::args(int index) {
     return _args[index];
-  }
+}
 
-  Atom const & Struct::name() {
+Atom const & Struct::name() {
     return _name;
-  }
-  string Struct::symbol() const{
+}
+  
+string Struct::symbol() const{
 
     string ret =_name.symbol() + "(";
     for(int i = 0; i<_args.size()-1; i++){
@@ -18,8 +19,8 @@
     }
     ret += _args[_args.size()-1]->symbol() + ")";
     return  ret;
-  }
-  string Struct::value() const{
+}
+string Struct::value() const{
 
     string ret =_name.value() + "(";
     for(int i = 0; i<_args.size()-1; i++){
@@ -27,8 +28,9 @@
     }
     ret += _args[_args.size()-1]->value() + ")";
     return  ret;
-  }
-  bool Struct::match(Term &term){
+}
+
+bool Struct::match(Term &term){
     Struct * ps = dynamic_cast<Struct *>(&term);
     if (ps){
       if (!_name.match(ps->_name))
@@ -42,4 +44,8 @@
       return true;
     }
     return false;
-  }
+}
+  
+int Struct::arity() {
+    return _args.size();
+}
