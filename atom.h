@@ -17,7 +17,6 @@ class Atom : public Term{
 public:
     Atom(string s);
     string symbol() const;
-
 	bool match(Term &term);
     friend class Variable;
 //private:

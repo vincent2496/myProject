@@ -1,8 +1,10 @@
 #ifndef NUMBER_H
 #define NUMBER_H
+
 #include "atom.h"
 #include "variable.h"
 #include "term.h"
+
 #include <iostream>
 #include <string>
 #include <sstream>

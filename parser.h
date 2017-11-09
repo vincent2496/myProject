@@ -19,9 +19,9 @@ public:
   Term* createTerm(){
     int token = _scanner.nextToken();
     if(token == VAR){
-      return new Variable(symtable[_scanner.tokenValue()].first);
+        return new Variable(symtable[_scanner.tokenValue()].first);
     }else if(token == NUMBER){
-      return new Number(_scanner.tokenValue());
+        return new Number(_scanner.tokenValue());
     }else if(token == ATOM || token == ATOMSC){
         Atom* atom = new Atom(symtable[_scanner.tokenValue()].first);
         if(_scanner.currentChar() == '(' ) {

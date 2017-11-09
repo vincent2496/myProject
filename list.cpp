@@ -61,12 +61,9 @@ bool List::match(Term & term){
 
     bool ret = true;
     if(pl){
-		//cout<<"1"<<endl;
-        if(_elements.size() != pl->elements().size()){
-        //cout<<"2"<<endl;        
+        if(_elements.size() != pl->elements().size()){       
 		ret = false;
         }else
-		//cout<<"3"<<endl;
 		{
             for(int i = 0; i < _elements.size(); i++){
                 if(_elements[i]->match( *(pl->elements()[i]) )!=true)
@@ -74,10 +71,10 @@ bool List::match(Term & term){
             }
         }
     }
-    else if(pv){//cout<<"4"<<endl;
+    else if(pv){
         ret = pv->match(*this);
     }
-    else{//cout<<"5"<<endl;
+    else{
         ret = false;
     }
     return ret;

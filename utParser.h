@@ -7,6 +7,7 @@
 #include "list.h"
 #include "variable.h"
 #include "number.h"
+
 #include <string>
 
 using std::string;
@@ -284,4 +285,5 @@ TEST_F(ParserTest, parseStructOneArg) {
 	Parser parser(scanner);
 	ASSERT_EQ("point(11)", parser.createTerm()->symbol());
 }
+
 #endif

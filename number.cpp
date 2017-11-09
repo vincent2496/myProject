@@ -23,6 +23,10 @@ bool Number::match(Term &term){
         if(var->getAssignable()==true || var->value() == _value){
             var->setVariableValue(_value);
             ret = true;
-        }else{ret = false;}
-        return ret;}
+        }
+		else{
+			ret = false;
+		}
+        return ret;
+	}
 }

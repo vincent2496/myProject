@@ -1,6 +1,8 @@
 #ifndef STRUCT_H
 #define STRUCT_H
+
 #include "atom.h"
+
 #include <vector>
 #include <string>
 #include <iostream>
