@@ -19,9 +19,7 @@ public:
     string symbol() const;
     string value() const;
     bool match(Term &term);
-	int arity() {
-      return _args.size();
-    }
+	int arity();
 private:
     Atom _name;
     std::vector<Term *> _args;

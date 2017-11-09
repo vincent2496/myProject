@@ -74,7 +74,7 @@ TEST_F(ParserTest, listOfTermsTwo) {
 TEST_F(ParserTest, parseStructOfStruct) {
     Scanner scanner("point(1, X, z(1,2,3))");
 	Parser parser(scanner);
-	ASSERT_EQ("point(1, X, z(1,2,3))", parser.createTerm()->symbol());
+	ASSERT_EQ("point(1, X, z(1, 2, 3))", parser.createTerm()->symbol());
 }
 
 
@@ -153,7 +153,7 @@ TEST_F(ParserTest, parseStructOfStructAllTheWay) {
 TEST_F(ParserTest, parseListOfLists) {
     Scanner scanner("   [  [1], [] ]");
 	Parser parser(scanner);
-	ASSERT_EQ("   [  [1], [] ]", parser.createTerm()->symbol());
+	ASSERT_EQ("[[1], []]", parser.createTerm()->symbol());
 }
 
 
@@ -164,7 +164,7 @@ TEST_F(ParserTest, parseListOfLists) {
 TEST_F(ParserTest, parseListOfListsAndStruct) {
     Scanner scanner("   [  [1], [], s(s(1)) ]   ");
 	Parser parser(scanner);
-	ASSERT_EQ("   [  [1], [], s(s(1)) ]   ", parser.createTerm()->symbol());
+	ASSERT_EQ("[[1], [], s(s(1))]", parser.createTerm()->symbol());
 }
 
 // Given there is string: "   [1, 2]" in scanner.
@@ -174,7 +174,7 @@ TEST_F(ParserTest, parseListOfListsAndStruct) {
 TEST_F(ParserTest, parseList) {
     Scanner scanner("   [1, 2]");
 	Parser parser(scanner);
-	ASSERT_EQ("   [  [1], [], s(s(1)) ]   ", parser.createTerm()->symbol());
+	ASSERT_EQ("[1, 2]", parser.createTerm()->symbol());
 }
 
 // Given there is string: "[1,2)" in scanner.
@@ -261,7 +261,7 @@ TEST_F(ParserTest, listOfTermsThree) {
 TEST_F(ParserTest, parseStructTwoArgs) {
     Scanner scanner("point(11,12)");
 	Parser parser(scanner);
-	ASSERT_EQ("point(11,12)", parser.createTerm()->symbol());
+	ASSERT_EQ("point(11, 12)", parser.createTerm()->symbol());
 }
 
 
@@ -272,7 +272,7 @@ TEST_F(ParserTest, parseStructTwoArgs) {
 TEST_F(ParserTest, parseStructDOTSTwoArgs) {
     Scanner scanner("...(11,12)");
 	Parser parser(scanner);
-	ASSERT_EQ("...(11,12)", parser.createTerm()->symbol());
+	ASSERT_EQ("...(11, 12)", parser.createTerm()->symbol());
 }
 
 // Given there is string: "point(11)" in scanner.

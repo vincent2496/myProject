@@ -10,6 +10,11 @@
   Atom const & Struct::name() {
     return _name;
   }
+  
+  int Struct::arity() {
+    return _args.size();
+  }
+	
   string Struct::symbol() const{
 
     string ret =_name.symbol() + "(";
@@ -25,6 +30,7 @@
     ret += _args[_args.size()-1]->symbol() + ")";
     return  ret;
   }
+  
   string Struct::value() const{
 
     string ret =_name.value() + "(";
@@ -41,6 +47,7 @@
     ret += _args[_args.size()-1]->value() + ")";
     return  ret;
   }
+  
   bool Struct::match(Term &term){
     Struct * ps = dynamic_cast<Struct *>(&term);
     if (ps){
