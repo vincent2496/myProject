@@ -12,7 +12,7 @@ class Variable : public Term
 public:
   Variable(string s) : Term(s), _inst(0)
   {
-    isVariable = true;
+    // isVariable = true;
   }
   string value() const
   {
@@ -21,24 +21,25 @@ public:
     else
       return Term::value();
   }
+  
   bool match(Term &term)
   {
-    if (term.isList == true)
-    {
-      for (int i = 0; i < term.size(); i++)
-      {
-        if (term.count(i).symbol() == _symbol)
-        {
-          return false;
-        }
-      }
-      if (!_inst)
-      {
-        _inst = &term;
-        return true;
-      }
-      return _inst->match(term);
-    }
+    // if (term.isList == true)
+    // {
+      // for (int i = 0; i < term.size(); i++)
+      // {
+        // if (term.count(i).symbol() == _symbol)
+        // {
+          // return false;
+        // }
+      // }
+      // if (!_inst)
+      // {
+        // _inst = &term;
+        // return true;
+      // }
+      // return _inst->match(term);
+    // }
 
     if (this == &term)
       return true;
@@ -49,10 +50,8 @@ public:
     }
     return _inst->match(term);
   }
-
-  Term *_inst;
-
 private:
+  Term *_inst;
 };
 
 #endif

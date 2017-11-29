@@ -11,9 +11,9 @@ using std::string;
 class Struct : public Term
 {
 public:
-  Struct(Atom name) : _name(name)
-  {
-  }
+  // Struct(Atom name) : _name(name)
+  // {
+  // }
 
   Struct(Atom name, std::vector<Term *> args) : _name(name)
   {
@@ -64,14 +64,14 @@ public:
     ret += (*it)->value() + ")";
     return ret;
   }
-  bool match(Term &a)
-  {
-    if (a.isList)
-    {
-      return false;
-    }
-  }
-  bool isList = false;
+  // bool match(Term &a)
+  // {
+    // if (a.isList)
+    // {
+      // return false;
+    // }
+  // }
+  //bool isList = false;
 
 private:
   Atom _name;

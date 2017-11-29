@@ -6,6 +6,7 @@
 #include "parser.h"
 #include "scanner.h"
 
+
 class ParserTest : public ::testing::Test {
 protected:
   void SetUp() {
@@ -283,11 +284,10 @@ TEST_F(ParserTest, TwoVariableMatching2) {
 
   Node * et = parser.expressionTree();
   EXPECT_TRUE(et->evaluate());
-
   EXPECT_EQ("1", terms[0]->value());
   EXPECT_EQ("1", terms[2]->value());
 }
-
+//6
 TEST_F(ParserTest, TwoVariableMatching3) {
   Scanner scanner("X=Y, X=1.");
   Parser parser(scanner);
@@ -301,11 +301,10 @@ TEST_F(ParserTest, TwoVariableMatching3) {
 
   Node * et = parser.expressionTree();
   EXPECT_TRUE(et->evaluate());
-
   EXPECT_EQ("1", terms[0]->value());
   EXPECT_EQ("1", terms[1]->value());
 }
-
+//7
 TEST_F(ParserTest, VarAStructOfVar) {
   Scanner scanner("X=s(Y).");
   Parser parser(scanner);
@@ -356,7 +355,7 @@ TEST_F(ParserTest, TwoVariableMatching4) {
   EXPECT_EQ("Y", terms[2]->symbol());
   EXPECT_EQ("1", terms[2]->value());
 }
-
+//9
 TEST_F(ParserTest, ConjTwoMatchingFailure) {
   Scanner scanner("X=1, X=2.");
   Parser parser(scanner);
@@ -416,7 +415,7 @@ TEST_F(ParserTest, MatchingSuccess) {
 
   EXPECT_EQ("1", terms[0]->value());
   EXPECT_EQ("2", terms[2]->value());
-  EXPECT_EQ("s(s(2))", terms[4]->value());
+  EXPECT_EQ("s(s(X))", terms[4]->value());
 }
 
 #endif

@@ -6,6 +6,8 @@
 #include "variable.h"
 #include <iostream>
 #include <vector>
+#include <typeinfo>
+
 using namespace std;
 
 class List : public Term
@@ -37,66 +39,41 @@ public:
     ret += "]";
     return ret;
   }
-  bool match(Term &term)
-  {
+  
+  bool match(Term & term){
+  bool ret = false;
+  if(typeid(term) == typeid(Variable)){ 
+    ret = term.match(*this);
+  }else if(_elements.size() != 0){  
+    List *pt = dynamic_cast<List *>(&term);
+    if(pt){
+      ret = ComparisonList(pt);
+    }
   }
-  bool match(List &list)
-  {
+  return ret;
+  }
+  
+	
+bool ComparisonList(List *list){
+  if(_elements.size() != list->getSize()) return false;
+  for(int i = 0; i < _elements.size(); i++){
+    if(!(_elements[i]->match(*(list->_elements[i])))) return false;
+  }
+  return true;
+}
 
-    if (this == &list)
-    {
-      return true;
-    }
-    else
-    {
-      if (this->size() == list.size())
-      {
-        for (int i = 0; i < list.size(); i++)
-        {
-          if (_elements[i]->isNumber == true && list._elements[i]->isVariable == true)
-          {
-            // list._elements[i]->_symbol =_elements[i]->symbol();
-            return true;
-          }
-          else if (_elements[i]->match(*list._elements[i]) == false)
-          {
-            return false;
-          }
-        }
-        return true;
-      }
-      else
-      {
-        return false;
-      }
-    }
-  }
-  bool match(Variable &var)
-  {
-    for (int i = 0; i < this->size(); i++)
-    {
-      if (this->count(i).symbol() == var.symbol())
-      {
-        return false;
-      }
-    }
-
-    if (!var._inst)
-    {
-      var._inst = this;
-      return true;
-    }
-    return var._inst->match(*this);
-  }
+int getSize() const{
+  return _elements.size();
+}
 
 public:
   List() : _elements()
   {
-    isList = true;
+    // isList = true;
   }
   List(vector<Term *> const &elements) : _elements(elements)
   {
-    isList = true;
+    // isList = true;
   }
   Term *head() const
   {

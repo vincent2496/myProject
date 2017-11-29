@@ -11,15 +11,15 @@ class Atom : public Term
 public:
   Atom(string s) : Term(s) {}
   bool isAtom = true;
-  bool match(Term &a)
-  {
-    if (a.isList)
-    {
-      return false;
-    }else{
-      return _symbol == a.symbol();
-    }
-  }
+  // bool match(Term &a)
+  // {
+    // if (a.isList)
+    // {
+      // return false;
+    // }else{
+      // return _symbol == a.symbol();
+    // }
+  // }
 };
 
 #endif
