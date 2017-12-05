@@ -9,7 +9,8 @@ else
 	g++ -o hw7 main.o number.o variable.o atom.o struct.o list.o term.o -lgtest -lpthread
 endif
 
-main.o: main.cpp utIterator.h parser.h global.h scanner.h
+main.o: main.cpp utIterator.h 
+#parser.h global.h scanner.h
 	g++ -std=gnu++0x -c main.cpp
 number.o: number.h atom.h variable.h number.cpp
 	g++ -std=gnu++0x -c number.cpp
