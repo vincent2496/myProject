@@ -10,6 +10,6 @@ bool Term::match(Term & a){
     return symbol() == a.symbol();
 }
 
-Iterator * Term::createIterator(){
-  return new NullIterator(this);
+Iterator<Term *> * Term::createIterator(){
+  return new Iterator<Term *>(this);
 }

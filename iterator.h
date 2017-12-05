@@ -1,20 +1,14 @@
 #ifndef ITERATOR_H
 #define ITERATOR_H
 
+#include "term.h"
 #include "struct.h"
 #include "list.h"
 
+template <class T> 
 class Iterator {
 public:
-  virtual void first() = 0;
-  virtual void next() = 0;
-  virtual Term* currentItem() const = 0;
-  virtual bool isDone() const = 0;
-};
-
-class NullIterator :public Iterator{
-public:
-  NullIterator(Term *n){}
+  Iterator(Term * n){}
   void first(){}
   void next(){}
   Term * currentItem() const{
@@ -23,14 +17,18 @@ public:
   bool isDone() const{
     return true;
   }
-
 };
 
-class StructIterator :public Iterator {
+template <>
+class Iterator<Struct *> {
 public:
   friend class Struct;
   void first() {
     _index = 0;
+  }
+
+    void next() {
+    _index++;
   }
 
   Term* currentItem() const {
@@ -40,20 +38,16 @@ public:
   bool isDone() const {
     return _index >= _s->arity();
   }
-
-  void next() {
-    _index++;
-  }
 private:
-  StructIterator(Struct *s): _index(0), _s(s) {}
+  Iterator(Struct *s): _index(0), _s(s) {}
   int _index;
   Struct* _s;
 };
 
-class ListIterator :public Iterator {
+template <>
+class Iterator<List *> {
 public:
-  ListIterator(List *list): _index(0), _list(list) {}
-
+  friend class List;
   void first() {
     _index = 0;
   }
@@ -70,7 +64,45 @@ public:
     _index++;
   }
 private:
+   Iterator(List *list): _index(0), _list(list) {}
   int _index;
   List* _list;
 };
+
+/*
+class NullIterator : public Iterator<class T>{
+public:
+  NullIterator(Term *n);
+  void first();
+  void next();
+  Term * currentItem() const;
+  bool isDone() const;
+};
+
+
+class DFSIterator : public Iterator {
+public:
+  void first() {
+    _index = 0;
+  }
+  void next() {
+    _index++;
+  }
+  Term * currentItem() const {
+      return _t;
+  }
+  bool isDone() const {
+    return true;
+  }
+private:
+  DFSIterator(T *t): _index(0), _t(t) {}
+  int _index;
+  T* _t;
+};
+ 
+class BFSIterator : public Iterator {
+ 
+};
+*/
+
 #endif

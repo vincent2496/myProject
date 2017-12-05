@@ -6,6 +6,8 @@
 #include "atom.h"
 #include "list.h"
 #include "iterator.h"
+
+
 TEST(iterator, first) {
     Number one(1);
     Variable X("X");
@@ -13,10 +15,7 @@ TEST(iterator, first) {
     Number two(2);
     Struct t(Atom("t"), { &X, &two });
     Struct s(Atom("s"), { &one, &t, &Y });
-    // StructIterator it(&s);
-    Iterator *itStruct = s.createIterator();
-    // Iterator& itStruct = it;
-    // ASSERT_EQ(it.first()->symbol());
+    Iterator<Struct *> *itStruct = s.createIterator();
     itStruct->first();
     ASSERT_EQ("1", itStruct->currentItem()->symbol());
     ASSERT_FALSE(itStruct->isDone());
@@ -29,28 +28,29 @@ TEST(iterator, first) {
     ASSERT_TRUE(itStruct->isDone());
 }
 
-// TEST(iterator, nested_iterator) {
-//   Number one(1);
-//   Variable X("X");
-//   Variable Y("Y");
-//   Number two(2);
-//   Struct t(Atom("t"), { &X, &two });
-//   Struct s(Atom("s"), { &one, &t, &Y });
-  // StructIterator it(&s);
-  // it.first();
-  // it.next();
-  // Struct *s2 = dynamic_cast<Struct *>(it.currentItem());
+TEST(iterator, nested_iterator) {
+  Number one(1);
+  Variable X("X");
+  Variable Y("Y");
+  Number two(2);
+  Struct t(Atom("t"), { &X, &two });
+  Struct s(Atom("s"), { &one, &t, &Y });
+  Iterator<Struct *> * it = s.createIterator();
+  it->first();
+  it->next();
+  Struct *s2 = dynamic_cast<Struct *>(it->currentItem());
 
-  // StructIterator it2(s2);
-  // it2.first();
-  // ASSERT_EQ("X", it2.currentItem()->symbol());
-  // ASSERT_FALSE(it2.isDone());
-  // it2.next();
-  // ASSERT_EQ("2", it2.currentItem()->symbol());
-  // ASSERT_FALSE(it2.isDone());
-  // it2.next();
-  // ASSERT_TRUE(it2.isDone());
-// }
+  Iterator<Struct *> * it2 = s2->createIterator();
+  it2->first();
+  ASSERT_EQ("X", it2->currentItem()->symbol());
+  ASSERT_FALSE(it2->isDone());
+  it2->next();
+  ASSERT_EQ("2", it2->currentItem()->symbol());
+  ASSERT_FALSE(it2->isDone());
+  it2->next();
+  ASSERT_TRUE(it2->isDone());
+}
+
 
 TEST(iterator, firstList) {
     Number one(1);
@@ -59,8 +59,7 @@ TEST(iterator, firstList) {
     Number two(2);
     Struct t(Atom("t"), { &X, &two });
     List l({ &one, &t, &Y });
-    ListIterator it(&l);
-    Iterator* itList = &it;
+    Iterator<List *> * itList = l.createIterator();
     itList->first();
     ASSERT_EQ("1", itList->currentItem()->symbol());
     ASSERT_FALSE(itList->isDone());
@@ -73,12 +72,9 @@ TEST(iterator, firstList) {
     ASSERT_TRUE(itList->isDone());
 }
 
-TEST(iterator, NullIterator){
+TEST(iterator, TermIterator){
   Number one(1);
-  NullIterator nullIterator(&one);
-  nullIterator.first();
-  ASSERT_TRUE(nullIterator.isDone());
-  Iterator * it = one.createIterator();
+  Iterator<Term *> *it = one.createIterator();
   it->first();
   ASSERT_TRUE(it->isDone());
 }
