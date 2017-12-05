@@ -1,25 +1,31 @@
 #ifndef ATOM_H
 #define ATOM_H
 
-#include <string>
-#include <sstream>
+#include "variable.h"
+#include "number.h"
 #include "term.h"
-using std::string;
 
-class Atom : public Term
-{
+#include <string>
+
+using std::string;
+using namespace::std;
+
+// class Variable;
+// class Number;
+
+// class Atom : public Term{
+// public:
+    // Atom(string s);
+    // string symbol() const;
+	// bool match(Term &term);
+    // friend class Variable;
+// private:
+    // string _symbol;
+// };
+
+class Atom : public Term{
 public:
-  Atom(string s) : Term(s) {}
-  bool isAtom = true;
-  // bool match(Term &a)
-  // {
-    // if (a.isList)
-    // {
-      // return false;
-    // }else{
-      // return _symbol == a.symbol();
-    // }
-  // }
+  Atom(string s):Term(s) {}
 };
 
 #endif

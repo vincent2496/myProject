@@ -1,23 +1,34 @@
 INC_DIR = include
 
-all: hw6
+all: hw7
 
-hw6: main.o term.o
+hw7: main.o number.o variable.o atom.o struct.o list.o term.o
 ifeq (${OS}, Windows_NT)
-	g++ -o hw6 main.o term.o -lgtest
+	g++ -o hw7 main.o number.o variable.o atom.o struct.o list.o term.o -lgtest
 else
-	g++ -o hw6 main.o term.o -lgtest -lpthread
+	g++ -o hw7 main.o number.o variable.o atom.o struct.o list.o term.o -lgtest -lpthread
 endif
-	
-main.o: main.cpp utParser.h term.h atom.h number.h variable.h struct.h list.h node.h
-	g++ -std=gnu++0x -c main.cpp
 
-term.o: term.h variable.h term.cpp
+main.o: main.cpp utIterator.h parser.h global.h scanner.h
+	g++ -std=gnu++0x -c main.cpp
+number.o: number.h atom.h variable.h number.cpp
+	g++ -std=gnu++0x -c number.cpp
+variable.o: variable.h atom.h number.h variable.cpp
+	g++ -std=gnu++0x -c variable.cpp
+atom.o: variable.h atom.h number.h atom.cpp
+	g++ -std=gnu++0x -c atom.cpp
+struct.o: variable.h atom.h number.h struct.cpp struct.h
+	g++ -std=gnu++0x -c struct.cpp
+list.o: variable.h atom.h number.h struct.cpp list.h
+	g++ -std=gnu++0x -c list.cpp
+term.o: variable.h iterator.h term.h
 	g++ -std=gnu++0x -c term.cpp
 	
-clean:	
+clean:
 ifeq (${OS}, Windows_NT)
 	del *.o *.exe
 else
-	rm -f *.o hw6
+	rm -f *.o exp
 endif
+stat:
+	wc *.h *.cpp
