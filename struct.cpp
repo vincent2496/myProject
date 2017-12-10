@@ -1,26 +1,115 @@
 #include "struct.h"
 #include "iterator.h"
-Iterator * Struct::createIterator()
-{
-  return new StructIterator(this);
+
+Iterator<Term*> * Struct::createIterator(){
+    return new StructIterator<Term *>(this);
 }
 
-  Struct::Struct(Atom const & name, std::vector<Term *> args):_name(name), _args(args) {
-  }
+Iterator<Term*> * Struct::createBFSIterator(){
+  vector <Term*> BFSvec = this->BFS();
+  return new BFSIterator<Term *>(BFSvec);
+}
 
-  Term * Struct::args(int index) {
+Iterator<Term*> * Struct::createDFSIterator(){
+  vector <Term*> DFSvec = this->DFS();
+  return new DFSIterator<Term *>(DFSvec);
+}
+
+void Struct::recursiveofDFS(List *l , stack<Term *> &s_t , vector<Term *> &v){
+    List *isList;  
+    Struct *isStruct;  
+    for(int i=0;  i<l->arity(); i++){
+      s_t.push(l->args(i));      
+      v.push_back(s_t.top());
+	  
+      isList = dynamic_cast<List*>(s_t.top());
+      isStruct = dynamic_cast<Struct*>(s_t.top());
+	  
+      if(isList){recursiveofDFS(isList, s_t, v);}
+      else if(isStruct){recursiveofDFS(isStruct, s_t, v);}
+      s_t.pop();
+    }
+}
+
+void Struct::recursiveofDFS(Struct *s, stack<Term *> &s_t, vector<Term *> &v){
+    List *isList;  
+    Struct *isStruct; 
+    for(int i=0; i<s->arity(); i++){
+      s_t.push(s->args(i));      
+      v.push_back(s_t.top());
+	  
+      isList = dynamic_cast<List*>(s_t.top());
+      isStruct = dynamic_cast<Struct*>(s_t.top());
+	  
+      if(isList){recursiveofDFS(isList, s_t, v);}
+      else if(isStruct){recursiveofDFS(isStruct, s_t, v);}
+      s_t.pop();
+    }
+ }
+
+vector<Term *> Struct::BFS(){
+    queue <Term *> q ;
+    vector<Term *> v ;
+    List *isList;  
+    Struct *isStruct;
+    for(int i = 0  ;  i < this->arity() ; i ++){
+      q.push(this->args(i));
+    }
+    while(!q.empty()){
+      isStruct = dynamic_cast<Struct*> (q.front());
+      isList = dynamic_cast<List *> (q.front());
+      if(isStruct){
+        for(int i=0; i<isStruct->arity(); i++){
+          q.push(isStruct->args(i));
+        }
+      }
+      else if(isList){
+        for(int i=0; i<isList->arity(); i++){
+          q.push(isList->args(i));
+        }
+      }
+    v.push_back(q.front());
+    q.pop();
+  }
+  return v;
+}
+
+vector<Term *> Struct::DFS(){
+    stack <Term *> s_t;
+    vector<Term *> v ;
+    List *isList;  
+    Struct *isStruct; 
+    for(int i = 0  ;  i < this->arity() ; i ++){
+      s_t.push(this->args(i));      
+      isStruct = dynamic_cast<Struct*>(s_t.top());
+      isList = dynamic_cast<List*> (s_t.top());    
+      v.push_back(s_t.top());
+      if(isStruct){
+        recursiveofDFS(isStruct,s_t,v);    
+      }
+      else if(isList){
+        recursiveofDFS(isList,s_t,v); 
+      }
+      s_t.pop();
+    }
+  return v;
+}
+
+Struct::Struct(Atom const & name, std::vector<Term *> args):_name(name), _args(args) {}
+
+Term * Struct::args(int index) {
     return _args[index];
-  }
+}
 
-  Atom const & Struct::name() {
+Atom const & Struct::name() {
     return _name;
-  }
+}
   
-  int Struct::arity() {
+int Struct::arity() {
     return _args.size();
-  }
+}
 	
-  string Struct::symbol() const{
+string Struct::symbol() const{
 
     string ret =_name.symbol() + "(";
 	
@@ -34,9 +123,9 @@ Iterator * Struct::createIterator()
     }
     ret += _args[_args.size()-1]->symbol() + ")";
     return  ret;
-  }
+}
   
-  string Struct::value() const{
+string Struct::value() const{
 
     string ret =_name.value() + "(";
 	
@@ -51,9 +140,9 @@ Iterator * Struct::createIterator()
 
     ret += _args[_args.size()-1]->value() + ")";
     return  ret;
-  }
+}
   
-  bool Struct::match(Term &term){
+bool Struct::match(Term &term){
     Struct * ps = dynamic_cast<Struct *>(&term);
     if (ps){
       if (!_name.match(ps->_name))
@@ -67,4 +156,6 @@ Iterator * Struct::createIterator()
       return true;
     }
     return false;
-  }
+}
+
+

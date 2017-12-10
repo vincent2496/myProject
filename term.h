@@ -5,7 +5,9 @@
 
 using namespace std;
 
+template <class T> 
 class Iterator;
+
 class Term{
 public:
     //virtual string symbol() const= 0;
@@ -20,14 +22,16 @@ public:
 	virtual int arity(){
 		return 0;
 	}
-	virtual Iterator * createIterator();
+public:
+    Iterator<Term *> * createIterator();
+	//virtual Iterator * createIterator();
 protected:
-  Term ():_symbol(""){}
-  Term (string s):_symbol(s) {}
-  Term (double db){
-    std::ostringstream strs;
-    strs << db;
-    _symbol = strs.str();
+    Term ():_symbol(""){}
+    Term (string s):_symbol(s) {}
+    Term (double db){
+      std::ostringstream strs;
+      strs << db;
+      _symbol = strs.str();
   }
   string _symbol;
 };

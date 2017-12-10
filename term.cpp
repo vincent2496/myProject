@@ -2,6 +2,7 @@
 #include "variable.h"
 #include "iterator.h"
 #include <typeinfo>
+#include "list.h"
 
 bool Term::match(Term & a){
   if (typeid(a) ==  typeid(Variable))
@@ -10,6 +11,6 @@ bool Term::match(Term & a){
     return symbol() == a.symbol();
 }
 
-Iterator * Term::createIterator(){
-  return new NullIterator(this);
+Iterator<Term *> * Term::createIterator(){
+  return new NullIterator<Term *>(this);
 }
