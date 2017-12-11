@@ -33,8 +33,8 @@ public:
 	Iterator<Term *> * createIterator();
 	vector<Term *> DFS(); 
 	vector<Term *> BFS();
-    void recursiveofDFS(Struct *s , stack<Term*> &s_t , vector<Term*> &v);
-    void recursiveofDFS(List *l ,  stack<Term*> &s_t , vector<Term*> &v);	
+    void recursiveDFS(Struct *s , stack<Term*> &s_t , vector<Term*> &v);
+    void recursiveDFS(List *l ,  stack<Term*> &s_t , vector<Term*> &v);	
 };
 
 #endif

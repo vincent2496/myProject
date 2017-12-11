@@ -54,7 +54,6 @@ TEST(iterator, nested_iterator) {
     ASSERT_TRUE(it2->isDone());
 }
 
-
 TEST(iterator, firstList) {
     Number one(1);
     Variable X("X");
@@ -88,7 +87,6 @@ TEST(iterator, NullIterator){
     it->first();
     ASSERT_TRUE(it->isDone());
 }
-
 
 TEST(iterator, BFSStruct){
     Number n1(1);
@@ -202,6 +200,7 @@ TEST(iterator, ListBFSIterator){
     itList->next();    
     ASSERT_TRUE(itList->isDone());
 }
+
 TEST(iterator, ListDFSIterator){
     Number one(1);
 	Number two(2);
@@ -255,6 +254,82 @@ TEST(iterator, DFSTwoList){
     it->next();        
     ASSERT_EQ("2", it->currentItem()->symbol());    
     it->next();      
+    ASSERT_TRUE(it->isDone());
+}
+
+TEST(iterator, ListBFS2){
+    Number one(1);
+    Number two(2);
+    Number three(3);    
+    Number four(4);
+    Number five(5);
+    Number six(6);    
+    List l1({&one, &two});
+    List l2({&three, &four});
+    List l3({&five});
+    List l4({&l2, &l3});        
+    List l5({&l4, &six, &l1});    
+
+    Iterator<Term*> *it = l5.createBFSIterator();
+    it->first();
+    ASSERT_EQ("[[3, 4], [5]]", it->currentItem()->symbol());
+    it->next();
+    ASSERT_EQ("6", it->currentItem()->symbol());
+    it->next();
+    ASSERT_EQ("[1, 2]", it->currentItem()->symbol());
+    it->next();
+    ASSERT_EQ("[3, 4]", it->currentItem()->symbol());
+    it->next();
+    ASSERT_EQ("[5]", it->currentItem()->symbol());
+    it->next();
+    ASSERT_EQ("1", it->currentItem()->symbol());
+    it->next(); 
+    ASSERT_EQ("2", it->currentItem()->symbol());
+    it->next(); 
+    ASSERT_EQ("3", it->currentItem()->symbol());
+    it->next(); 
+    ASSERT_EQ("4", it->currentItem()->symbol());
+    it->next(); 
+    ASSERT_EQ("5", it->currentItem()->symbol());
+    it->next();  
+    ASSERT_TRUE(it->isDone());
+}
+
+TEST(iterator, ListDFS2){
+    Number one(1);
+    Number two(2);
+    Number three(3);    
+    Number four(4);
+    Number five(5);
+    Number six(6);    
+    List l1({&one, &two});
+    List l2({&three, &four});
+    List l3({&five});
+    List l4({&l2, &l3});        
+    List l5({&l4, &six, &l1});    
+
+    Iterator<Term*> *it = l5.createDFSIterator();
+    it->first();
+    ASSERT_EQ("[[3, 4], [5]]", it->currentItem()->symbol());
+    it->next();
+    ASSERT_EQ("[3, 4]", it->currentItem()->symbol());
+    it->next();
+    ASSERT_EQ("3", it->currentItem()->symbol());
+    it->next();
+    ASSERT_EQ("4", it->currentItem()->symbol());
+    it->next();
+    ASSERT_EQ("[5]", it->currentItem()->symbol());
+    it->next();
+    ASSERT_EQ("5", it->currentItem()->symbol());
+    it->next(); 
+    ASSERT_EQ("6", it->currentItem()->symbol());
+    it->next(); 
+    ASSERT_EQ("[1, 2]", it->currentItem()->symbol());
+    it->next(); 
+    ASSERT_EQ("1", it->currentItem()->symbol());
+    it->next(); 
+    ASSERT_EQ("2", it->currentItem()->symbol());
+    it->next();  
     ASSERT_TRUE(it->isDone());
 }
 

@@ -6,16 +6,16 @@ Iterator<Term*> * Struct::createIterator(){
 }
 
 Iterator<Term*> * Struct::createBFSIterator(){
-  vector <Term*> BFSvec = this->BFS();
+  vector<Term*> BFSvec = this->BFS();
   return new BFSIterator<Term *>(BFSvec);
 }
 
 Iterator<Term*> * Struct::createDFSIterator(){
-  vector <Term*> DFSvec = this->DFS();
+  vector<Term*> DFSvec = this->DFS();
   return new DFSIterator<Term *>(DFSvec);
 }
 
-void Struct::recursiveofDFS(List *l , stack<Term *> &s_t , vector<Term *> &v){
+void Struct::recursiveDFS(List *l, stack<Term *> &s_t, vector<Term *> &v){
     List *isList;  
     Struct *isStruct;  
     for(int i=0;  i<l->arity(); i++){
@@ -25,13 +25,13 @@ void Struct::recursiveofDFS(List *l , stack<Term *> &s_t , vector<Term *> &v){
       isList = dynamic_cast<List*>(s_t.top());
       isStruct = dynamic_cast<Struct*>(s_t.top());
 	  
-      if(isList){recursiveofDFS(isList, s_t, v);}
-      else if(isStruct){recursiveofDFS(isStruct, s_t, v);}
+      if(isList){recursiveDFS(isList, s_t, v);}
+      else if(isStruct){recursiveDFS(isStruct, s_t, v);}
       s_t.pop();
     }
 }
 
-void Struct::recursiveofDFS(Struct *s, stack<Term *> &s_t, vector<Term *> &v){
+void Struct::recursiveDFS(Struct *s, stack<Term *> &s_t, vector<Term *> &v){
     List *isList;  
     Struct *isStruct; 
     for(int i=0; i<s->arity(); i++){
@@ -41,23 +41,28 @@ void Struct::recursiveofDFS(Struct *s, stack<Term *> &s_t, vector<Term *> &v){
       isList = dynamic_cast<List*>(s_t.top());
       isStruct = dynamic_cast<Struct*>(s_t.top());
 	  
-      if(isList){recursiveofDFS(isList, s_t, v);}
-      else if(isStruct){recursiveofDFS(isStruct, s_t, v);}
+      if(isList){recursiveDFS(isList, s_t, v);}
+      else if(isStruct){recursiveDFS(isStruct, s_t, v);}
       s_t.pop();
     }
  }
 
 vector<Term *> Struct::BFS(){
-    queue <Term *> q ;
-    vector<Term *> v ;
+
+    vector<Term *> v;
+	queue <Term *> q;
+	
     List *isList;  
     Struct *isStruct;
-    for(int i = 0  ;  i < this->arity() ; i ++){
+	
+    for(int i=0;  i<this->arity(); i++){
       q.push(this->args(i));
     }
+	
     while(!q.empty()){
       isStruct = dynamic_cast<Struct*> (q.front());
       isList = dynamic_cast<List *> (q.front());
+	  
       if(isStruct){
         for(int i=0; i<isStruct->arity(); i++){
           q.push(isStruct->args(i));
@@ -79,17 +84,15 @@ vector<Term *> Struct::DFS(){
     vector<Term *> v ;
     List *isList;  
     Struct *isStruct; 
-    for(int i = 0  ;  i < this->arity() ; i ++){
+	
+    for(int i=0; i<this->arity(); i++){
       s_t.push(this->args(i));      
       isStruct = dynamic_cast<Struct*>(s_t.top());
       isList = dynamic_cast<List*> (s_t.top());    
       v.push_back(s_t.top());
-      if(isStruct){
-        recursiveofDFS(isStruct,s_t,v);    
-      }
-      else if(isList){
-        recursiveofDFS(isList,s_t,v); 
-      }
+	  
+      if(isStruct){recursiveDFS(isStruct,s_t,v);}
+      else if(isList){recursiveDFS(isList,s_t,v);}
       s_t.pop();
     }
   return v;

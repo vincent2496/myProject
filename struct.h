@@ -35,8 +35,8 @@ public:
 	Iterator<Term*> * createIterator();
 	vector<Term *> BFS();
     vector<Term *> DFS(); 
-	void recursiveofDFS(Struct *s , stack<Term*> &s_t , vector<Term*> &v);
-    void recursiveofDFS(List *l ,  stack<Term*> &s_t , vector<Term*> &v);
+	void recursiveDFS(Struct *s , stack<Term*> &s_t , vector<Term*> &v);
+    void recursiveDFS(List *l ,  stack<Term*> &s_t , vector<Term*> &v);
 private:
     Atom _name;
     std::vector<Term *> _args;
