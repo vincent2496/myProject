@@ -11,8 +11,8 @@ Iterator<Term *> * List::createBFSIterator (){
 }
 
 vector<Term *> List::BFS(){
-    queue <Term *> q ;
-    vector<Term *> v ;
+    queue <Term *> q;
+    vector<Term *> v;
     List *isList;  
     Struct *isStruct;
 	
@@ -41,7 +41,7 @@ vector<Term *> List::BFS(){
 
 vector<Term *> List::DFS(){
     stack <Term *> s_t;
-    vector<Term *> v ;
+    vector<Term *> v;
     List *isList;
 	
     Struct *isStruct; 

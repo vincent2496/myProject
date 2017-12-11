@@ -81,7 +81,7 @@ vector<Term *> Struct::BFS(){
 
 vector<Term *> Struct::DFS(){
     stack <Term *> s_t;
-    vector<Term *> v ;
+    vector<Term *> v;
     List *isList;  
     Struct *isStruct; 
 	
