@@ -2,44 +2,65 @@
 #define STRUCT_H
 
 #include "atom.h"
-// #include "iterator.h"
 #include <vector>
 #include <string>
-#include <iostream>
-#include <queue>
-#include <stack>
 
-using namespace std;
+using std::string;
 
-// class Number;
-// class variable;
-// class Iterator;
-
-// template <class T> 
-// class Iterator;
-
-class Struct : public Term
-{
+class Struct: public Term {
 public:
-    Struct(Atom const & name, std::vector<Term *> args);
-    Term * args(int index);
-    Atom const & name();
-    string symbol() const;
-    string value() const;
-    bool match(Term &term);
-	int arity();
-	//Iterator * createIterator();
-public:	
-	Iterator<Term *> * createDFSIterator();
-    Iterator<Term *> * createBFSIterator();
-	Iterator<Term*> * createIterator();
-	vector<Term *> BFS();
-    vector<Term *> DFS(); 
-	void recursiveDFS(Struct *s , stack<Term*> &s_t , vector<Term*> &v);
-    void recursiveDFS(List *l ,  stack<Term*> &s_t , vector<Term*> &v);
-private:
-    Atom _name;
-    std::vector<Term *> _args;
+  Struct(Atom name, std::vector<Term *> args): _name(name), _args(args){
+  }
+
+
+  bool match(Term &term) {
+    if (term.getVariable() != nullptr) {
+      return term.match(*this);
+    }
+    Struct *s = term.getStruct();
+    if (s == nullptr || s->arity() != arity() || !_name.match(s->_name))
+      return false;
+
+    for (int i = 0; i < _args.size(); i++)
+      if (!s->_args[i]->match(*_args[i]))
+        return false;
+    return true;
+  }
+
+  Term * args(int index) {
+    return _args[index];
+  }
+
+  Atom & name() {
+    return _name;
+  }
+
+  string symbol() const {
+      string ret = _name.symbol() + "(";
+      for (int i = 0; i < _args.size(); i++)
+        ret += ((i > 0) ?  ", "  : "") + _args[i]->symbol();
+      return ret + ")";
+  }
+
+  string value() const {
+    string ret = _name.symbol() + "(";
+    for (int i = 0; i < _args.size(); i++)
+      ret += ((i > 0) ?  ", "  : "") + _args[i]->value();
+    return ret + ")";
+  }
+
+  int arity() const {
+    return _args.size();
+  }
+
+  Struct* getStruct() {
+    return this;
+  }
+
+  Iterator * createIterator();
+protected:
+  Atom _name;
+  std::vector<Term *> _args;
 };
 
 #endif

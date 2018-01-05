@@ -1,40 +1,49 @@
 #ifndef LIST_H
 #define LIST_H
 
-#include "term.h"
-#include "variable.h"
+#include "struct.h"
 #include <vector>
-#include <string>
-#include <stack>
-
+#include <typeinfo>
+#include <iostream>
 using std::vector;
-using namespace std;
+class Variable ;
 
-class Struct;
-
-class List : public Term{
+class List : public Struct {
 public:
-    bool match(Term & term);
-    List (): _elements(0) {}
-    List (vector<Term *> const & elements):_elements(elements){}
-	vector<Term *> elements();
-    string symbol() const;
-    string value() const;
-    Term * head() const;
-    List * tail() const;
-	Term * args(int i);
-    int length() const;
-	int arity() const;
+  string symbol() const ;
+  string value() const ;
+
+public:
+
+  List (vector<Term *> const & elements): Struct(Atom("."), {elements[0], createTail(elements)}){
+  }
+
+  List(Term * head, Term* tail):Struct(Atom("."), { head, tail }) {
+
+  }
+
+  Term * head() const;
+  Term * tail() const;
+
+  Term * args(int index) {
+    return _elements[index];
+  }
+
+  int arity() const {
+    return _elements.size();
+  }
+
+  Iterator * createIterator();
 private:
-    vector<Term *> _elements;
-public:
-	Iterator<Term *> * createDFSIterator();
-    Iterator<Term *> * createBFSIterator();
-	Iterator<Term *> * createIterator();
-	vector<Term *> DFS(); 
-	vector<Term *> BFS();
-    void recursiveDFS(Struct *s , stack<Term*> &s_t , vector<Term*> &v);
-    void recursiveDFS(List *l ,  stack<Term*> &s_t , vector<Term*> &v);	
+  vector<Term *> _elements;
+  
+  Term* createTail(std::vector<Term*> const &args){
+    Term* tail = new Atom("[]");
+    for (int i = args.size() - 1; i > 0; i--) {
+      tail = new List(args[i], tail);
+    }
+    return tail;
+  }
 };
 
 #endif

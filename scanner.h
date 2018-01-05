@@ -3,9 +3,9 @@
 
 #include "global.h"
 
+
 #include <string>
 #include <vector>
-
 using std::string;
 using std::vector;
 
@@ -24,7 +24,7 @@ public:
         string s = extractAtom();
         processToken<ATOM>(s);
         return ATOM;
-      } else if (isSpecialCh(currentChar())) {
+      } else if (isSpecialCh(currentChar()) && position() < buffer.length() - 1) {
         string s = extractAtomSC();
         processToken<ATOMSC>(s);
         return ATOMSC;
@@ -60,7 +60,7 @@ public:
 
   string extractAtom() {
     int posBegin = position();
-    for (;isalnum(buffer[pos]); ++pos);
+    for (; isalnum(buffer[pos])||(buffer[pos]=='_'); ++pos);
     return buffer.substr(posBegin, pos-posBegin);
   }
 
@@ -98,5 +98,6 @@ private:
     }
   }
 };
+
 
 #endif
